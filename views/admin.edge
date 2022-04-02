@@ -1,0 +1,2279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Панель управления</title>
+	<link href="{{ domain }}public/favicon.ico" rel="shortcut icon" type="image/x-icon">
+	<link href="{{ domain }}public/cp/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+	<link href="{{ domain }}public/cp/css/style.css" rel="stylesheet" type="text/css">
+	<link href="{{ domain }}public/css/notifyme.css" rel="stylesheet">
+</head>
+<script>
+	const SSL = parseInt('{{ ssl }}');
+</script>
+<body>
+    <div class="wrapper theme-2-active navbar-top-light" id="app">
+		<!-- Top Menu Items -->
+			<nav class="navbar navbar-inverse navbar-fixed-top">
+				<div class="nav-wrap">
+                    <div class="mobile-only-brand pull-left">
+                        <div class="nav-header pull-left">
+                            <div class="logo-wrap">
+                                <a v-on:click="react('/admin')">
+                                    <img class="brand-img" src="{{ domain }}public/cp/img/logo.png?v1" alt="brand"/>
+                                    <span class="brand-text"><img  src="{{ domain }}public/cp/img/brand.png?v1" alt="brand"/></span>
+                                </a>
+                            </div>
+                        </div>	
+                        <a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block ml-20 pull-left" href="javascript:void(0);" v-on:click="toogle_nav"><i class="ti-align-left"></i></a>
+                    </div>
+                    <div class="mobile-only-nav pull-right">
+                        <ul class="nav navbar-right top-nav pull-right">
+                            <li class="auth-drp">
+                                <a class="pr-0"><img v-bind:src="user.avatar" alt="12" class="user-auth-img img-circle"/></a>
+                            </li>
+                        </ul>
+                    </div>	
+				</div>
+			</nav>
+			<!-- /Top Menu Items -->
+			
+			<!-- Left Sidebar Menu -->
+			<div class="fixed-sidebar-left">
+				<ul class="nav navbar-nav side-nav nicescroll-bar">
+					<li>
+						<a v-on:click="react('/admin')">
+						    <div class="pull-left">
+                                <i class="ti-stats-up mr-20"></i>
+                                <span class="right-nav-text">Статистика</span>
+						    </div>
+						    <div class="clearfix"></div>
+						</a>
+					</li>
+					<li>
+						<a v-on:click="react('/admin/users')">
+						    <div class="pull-left">
+                                <i class="ti-user mr-20"></i>
+                                <span class="right-nav-text">Пользователи</span>
+						    </div>
+						    <div class="clearfix"></div>
+						</a>
+					</li>
+					<li>
+						<a v-on:click="react('/admin/bots')">
+						    <div class="pull-left">
+                                <i class="ti-user mr-20"></i>
+                                <span class="right-nav-text">Боты</span>
+						    </div>
+						    <div class="clearfix"></div>
+						</a>
+					</li>
+					<li>
+						<a v-on:click="react('/admin/promo')">
+						    <div class="pull-left">
+                                <i class="ti-shortcode mr-20"></i>
+                                <span class="right-nav-text">Промокоды</span>
+						    </div>
+						    <div class="clearfix"></div>
+						</a>
+					</li>
+					<li>
+						<a v-on:click="react('/admin/settings')">
+						    <div class="pull-left">
+                                <i class="ti-settings mr-20"></i>
+                                <span class="right-nav-text">Настройки</span>
+						    </div>
+						    <div class="clearfix"></div>
+						</a>
+					</li>
+					<li>
+						<a v-on:click="react('/admin/payments')">
+						    <div class="pull-left">
+                                <i class="ti-money mr-20"></i>
+                                <span class="right-nav-text">Пополнения</span>
+						    </div>
+						    <div class="clearfix"></div>
+						</a>
+					</li>
+					<li>
+						<a v-on:click="react('/admin/withdraw')">
+						    <div class="pull-left">
+                                <i class="ti-money mr-20"></i>
+                                <span class="right-nav-text">Выводы</span>
+						    </div>
+						    <div class="clearfix"></div>
+						</a>
+					</li>
+					<li>
+						<a v-on:click="react('/admin/alerts')">
+						    <div class="pull-left">
+                                <i class="ti-settings mr-20"></i>
+                                <span class="right-nav-text">Баннеры</span>
+						    </div>
+						    <div class="clearfix"></div>
+						</a>
+					</li>
+					<li>
+						<a v-on:click="react('/admin/market')">
+						    <div class="pull-left">
+                                <i class="ti-settings mr-20"></i>
+                                <span class="right-nav-text">Магазин</span>
+						    </div>
+						    <div class="clearfix"></div>
+						</a>
+					</li>
+					<li class="navigation-header">
+						<span> </span> 
+						<hr>
+					</li>
+					<li>
+						<a href="/">
+						    <div class="pull-left">
+                                <i class="ti-share-alt mr-20"></i>
+                                <span class="right-nav-text">Вернуться на сайт</span>
+						    </div>
+						    <div class="clearfix"></div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /Left Sidebar Menu -->
+		
+        <!-- Main Content -->
+		<div class="page-wrapper">
+			<div class="container pt-30" v-if="template == 'promo'">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="panel panel-default border-panel card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">
+										Промокоды
+									</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<div id="createPromo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createPromoLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+													<h5 class="modal-title" id="myModalLabel">Новый промокод</h5>
+												</div>
+												<form>
+													<div class="modal-body">
+														<div class="form-group">
+															<label for="recipient-name" class="control-label mb-10">Код (только английские символы):</label>
+															<input type="text" class="form-control" name="code" placeholder="Код" id="promo_code">
+														</div>
+														<div class="form-group">
+															<label for="recipient-name" class="control-label mb-10">Сумма (в монетах):</label>
+															<input type="text" class="form-control" name="amount" placeholder="Сумма" id="promo_amount">
+														</div>
+														<div class="form-group">
+															<label for="recipient-name" class="control-label mb-10">Кол-во:</label>
+															<input type="text" class="form-control" name="count_use" placeholder="Кол-во" id="promo_count">
+														</div>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+														<button type="submit" class="btn btn-success" v-on:click="createPromo">Создать</button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+									
+									<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createPromoLabel" aria-hidden="true" id="editPromo">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+													<h5 class="modal-title" id="myModalLabel">Редактировать промокод</h5>
+												</div>
+												<form action="/admin/promoSave" method="post">
+													<div class="modal-body">
+														<input type="hidden" value="1" name="id" id="edit_promo_id">
+														<div class="form-group">
+															<label for="recipient-name" class="control-label mb-10">Код (только английские символы):</label>
+															<input type="text" class="form-control" name="code" placeholder="Код" value="2" id="edit_promo_promo">
+														</div>
+														<div class="form-group">
+															<label for="recipient-name" class="control-label mb-10">Сумма (в монетах):</label>
+															<input type="text" class="form-control" name="amount" placeholder="Сумма" value="" id="edit_promo_amount">
+														</div>
+														<div class="form-group">
+															<label for="recipient-name" class="control-label mb-10">Кол-во:</label>
+															<input type="text" class="form-control" name="count_use" placeholder="Кол-во" value="" id="edit_promo_count">
+														</div>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+														<button type="submit" class="btn btn-success" v-on:click="savePromo">Сохранить</button>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+							
+									<div class="text-center">
+										<a class="btn btn-success btn-rounded" data-toggle="modal" data-target="#createPromo">Создать промокод</a>
+									</div>
+									<table class="table table-hover display  pb-30 promo_table" role="grid" aria-describedby="datable_1_info">
+										<thead>
+											<tr>
+												<th>Код</th>
+												<th>Сумма</th>
+												<th>Кол-во</th>
+												<th>Действия</th>
+											</tr>
+										</thead>
+										<tbody>
+										
+											<tr v-for="p in paths.promo">
+												<td>@{{ p.promo }}</td>
+												<td>@{{ p.amount }}</td>
+												<td>@{{ p.count }}</td>
+												<td class="text-center"><a class="btn btn-primary btn-rounded btn-xs" v-on:click="editPromo(p)">Редактировать</a> / <a v-on:click="deletePromo(p.id)" class="btn btn-danger btn-rounded btn-xs">Удалить</a></td>
+											</tr>
+				
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>Код</th>
+												<th>Сумма</th>
+												<th>Кол-во</th>
+												<th>Действия</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container pt-30" v-if="template == 'bots'">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="panel panel-default border-panel card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">
+										Локальный бот
+									</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<div class="form-wrap">
+										<form v-on:submit="createBot" id="createBotForm">
+											<div class="row">
+												<div class="form-group">
+													<label class="col-sm-12 control-label">Имя пользователя</label>
+													<div class="col-sm-12">
+														<input type="text" class="form-control" name="username" value="">
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-sm-12 col-md-12 col-xs-12">
+														<button class="btn btn-success" type="submit" style="width : 100%; margin-top : 10px;" v-if="!paths.bots.create">Создать</button>
+														<button class="btn btn-success"  style="width : 100%; margin-top : 10px; opacity : 0.5;" v-if="paths.bots.create">Создаем..</button>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="panel panel-default border-panel card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">
+										Парс бота
+									</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<div class="form-wrap">
+										<form v-on:submit="parseBot" id="parseBotForm">
+											<div class="row">
+												<div class="form-group">
+													<label class="col-sm-12 control-label">Ссылка [steam/vkontakte]</label>
+													<div class="col-sm-12">
+														<input type="text" class="form-control" name="href" value="">
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-sm-12 col-md-12 col-xs-12">
+															<button class="btn btn-success" type="submit" style="width : 100%; margin-top : 10px;" v-if="!paths.bots.parse">Создать</button>
+															<button class="btn btn-success"  style="width : 100%; margin-top : 10px; opacity : 0.5;" v-if="paths.bots.parse">Создаем..</button>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div class="panel panel-default border-panel card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">
+										Боты
+									</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<table class="table table-hover display  pb-30 bots_table">
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>Пользователь</th>
+												<th>Активен</th>
+												<th>Кол-во ставок</th>
+												<th>Вип</th>
+												<th>Время ставок</th>
+												<th>Действия</th>
+											</tr>
+										</thead>
+										<tbody>
+												<tr v-for="bot in paths.bots.list">
+													<td>@{{ bot.id }}</td>
+													<td style="line-height: 31px;">
+														<a v-on:click="react('/admin/bots/' + bot.id)">
+																<img v-bind:src="bot.avatar" alt="" width="30px" height="30px" style="float : left; border-radius : 50%; margin-right : 10px;"> @{{bot.username}}
+														</a>
+													</td>
+													<td>
+														<span v-if="bot.active">Да</span>
+														<span v-if="!bot.active">Нет</span>
+													</td>
+													<td>@{{ bot.count }}</td>
+													<td>
+														<span v-if="bot.vip">Да</span>
+														<span v-if="!bot.vip">Нет</span>
+													</td>
+													<td>
+														<span v-if="bot.time == 0">00:00 - 6:00</span>
+														<span v-if="bot.time == 1">6:00 - 12:00</span>
+														<span v-if="bot.time == 2">12:00 - 18:00</span>
+														<span v-if="bot.time == 3">18:00 - 00:00</span>
+													</td>
+													<td>
+														<button class="btn btn-danger" v-on:click="deleteBot(bot.id)">Удалить</button>
+													</td>
+												</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>ID</th>
+												<th>Пользователь</th>
+												<th>Активен</th>
+												<th>Кол-во ставок</th>
+												<th>Вип</th>
+												<th>Время ставок</th>
+												<th>Действия</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container pt-30" v-if="template == 'market'">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="panel panel-default border-panel card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">
+										Добавление предмета
+									</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<div class="form-wrap">
+										<form v-on:submit="createItem" id="createItemForm">
+											<div class="row">
+												<div class="form-group">
+													<label class="col-sm-12 control-label">Название предмета</label>
+													<div class="col-sm-12">
+														<input type="text" class="form-control" name="market_hash_name" value="" id="market_hash_name">
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-12 control-label">Игра</label>
+													<div class="col-sm-12">
+														<select class="form-control" id="game" v-on:change="updateMarketGame">
+															<option value="csgo">CS:GO</option>
+															<option value="dota2">Dota2</option>
+															<option value="real">Реальные вещи</option>
+														</select>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-sm-12 control-label">@{{ (paths.market.game == 'real') ? 'Стоимость' : 'Максимальная цена' }}</label>
+													<div class="col-sm-12">
+														<input type="text" class="form-control" name="item_price" value="" id="item_price">
+													</div>
+												</div>
+												<div class="form-group" v-if="paths.market.game == 'dota2' || paths.market.game == 'real'">
+													<label class="col-sm-12 control-label">Количество</label>
+													<div class="col-sm-12">
+														<input type="text" class="form-control" name="count" value="" id="count">
+													</div>
+												</div>
+												<div class="form-group" v-if="paths.market.game == 'real'">
+													<label class="col-sm-12 control-label">Размеры (через пробел)</label>
+													<div class="col-sm-12">
+														<input type="text" class="form-control" name="size" value="" id="size">
+													</div>
+												</div>
+												<div class="form-group" v-if="paths.market.game == 'real'">
+													<label class="col-sm-12 control-label">Изображение</label>
+													<div class="col-sm-12">
+														<input type="text" class="form-control" name="icon_url" value="" id="icon_url">
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-sm-12 col-md-12 col-xs-12">
+														<button class="btn btn-success" type="submit" style="width : 100%; margin-top : 10px;" v-if="!paths.market.disableButton">Добавить</button>
+														<button class="btn btn-success"  style="width : 100%; margin-top : 10px; opacity : 0.5;" v-if="paths.market.disableButton">Добавляем..</button>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div class="panel panel-default border-panel card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">
+										Реальные вещи
+									</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<table class="table table-hover display  pb-30 market_real">
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>Название</th>
+												<th>Размеры</th>
+												<th>Кол-во</th>
+												<th>Цена</th>
+												<th>Действия</th>
+											</tr>
+										</thead>
+										<tbody>
+												<tr v-for="item in paths.market.items" v-if="item.game == 'real'">
+													<td>@{{ item.id }}</td>
+													<td>@{{ item.market_hash_name }}</td>
+													<td>@{{ item.size }}</td>
+													<td>@{{ item.count }}шт.</td>
+													<td>@{{ item.price }}</td>
+													<td>
+														<button class="btn btn-danger" v-on:click="deleteItem(item.id)">Удалить</button>
+													</td>
+												</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>ID</th>
+												<th>Название</th>
+												<th>Размеры</th>
+												<th>Кол-во</th>
+												<th>Цена</th>
+												<th>Действия</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="panel panel-default border-panel card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">
+										Предметы CS:GO
+									</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<table class="table table-hover display  pb-30 market_csgo">
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>Игра</th>
+												<th>Название</th>
+												<th>Кол-во</th>
+												<th>Действия</th>
+											</tr>
+										</thead>
+										<tbody>
+												<tr v-for="item in paths.market.items" v-if="item.game == 'csgo'">
+													<td>@{{ item.id }}</td>
+													<td>@{{ item.game }}</td>
+													<td>@{{ item.market_hash_name }}</td>
+													<td>@{{ item.count }}шт.</td>
+													<td>
+														<button class="btn btn-danger" v-on:click="deleteItem(item.id)">Удалить</button>
+													</td>
+												</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>ID</th>
+												<th>Игра</th>
+												<th>Название</th>
+												<th>Кол-во</th>
+												<th>Действия</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="panel panel-default border-panel card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">
+										Предметы Dota2
+									</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<table class="table table-hover display  pb-30 market_dota">
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>Игра</th>
+												<th>Название</th>
+												<th>Кол-во</th>
+												<th>Действия</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr v-for="item in paths.market.items" v-if="item.game == 'dota2'">
+												<td>@{{ item.id }}</td>
+												<td>@{{ item.game }}</td>
+												<td>@{{ item.market_hash_name }}</td>
+												<td>@{{ item.count }}шт.</td>
+												<td>
+													<button class="btn btn-danger" v-on:click="deleteItem(item.id)">Удалить</button>
+												</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>ID</th>
+												<th>Игра</th>
+												<th>Название</th>
+												<th>Кол-во</th>
+												<th>Действия</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container pt-30" v-if="template == 'bot'">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="panel panel-default card-view">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<div class="profile-box">
+										<div class="profile-info text-center mb-15">
+											<div class="profile-img-wrap">
+												<img alt="user" class="inline-block mb-10" v-bind:src="paths.bot.avatar">
+											</div>
+											<h5 class="block mt-10 weight-500 capitalize-font txt-dark">
+												@{{ paths.bot.username }}
+											</h5>
+											<h6 class="block capitalize-font">Бот</h6>
+										</div>
+
+										<div class="social-info">
+											<div class="row">
+												<div class="col-xs-6 text-center">
+													<span class="counts block head-font">0</span> <span class="counts-text block">кол-во ставок</span>
+												</div>
+												<div class="col-xs-6 text-center">
+													<span class="counts block head-font">0р</span> <span class="counts-text block">сумма ставок</span>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="panel panel-default card-view">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<div class="form-wrap">
+										<form class="form-horizontal">
+											<input name="id" value="0" type="hidden">
+											<div class="form-group">
+												<label class="col-sm-3 control-label">Имя пользователя</label>
+												<div class="col-sm-9">
+													<input type="text" class="form-control" name="username" v-bind:value="paths.bot.username" readonly>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label col-md-3">Активен</label>
+												<div class="col-md-9">
+													<select class="form-control" id="bot_active" v-on:change="changeBot('active')">
+														<option value="1">Да</option>
+														<option value="0">Нет</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label col-md-3">Время ставок</label>
+												<div class="col-md-9">
+													<select class="form-control" id="bot_time" v-on:change="changeBot('time')">
+														<option value="0">00:00 - 06:00</option>
+														<option value="1">06:00 - 12:00</option>
+														<option value="2">12:00 - 18:00</option>
+														<option value="3">18:00 - 00:00</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label col-md-3">Вип</label>
+												<div class="col-md-9">
+													<select class="form-control" id="bot_vip" v-on:change="changeBot('vip')">
+														<option value="1">Да</option>
+														<option value="0">Нет</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label col-md-3">Ставки в краше</label>
+												<div class="col-md-9">
+													<select class="form-control" id="bot_crash" v-on:change="changeBot('bot_crash')">
+														<option value="1">Да</option>
+														<option value="0">Нет</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group" v-if="paths.bot.crash">
+												<label class="control-label col-md-3">Суммы ставок в краше</label>
+												<div class="col-md-9">
+													<input type="text" id="bets_crash" class="form-control"  v-bind:value="paths.bot.bets_crash" v-on:input="changeBot('bets_crash')">
+												</div>
+											</div>
+
+											<div class="form-group" v-if="paths.bot.crash">
+												<label class="control-label col-md-3">Схемы вывода [1.0x/1.xx/rand]</label>
+												<div class="col-md-9">
+													<input type="text" id="bets_crash_cashout" class="form-control"  v-bind:value="paths.bot.bets_crash_cashout" v-on:input="changeBot('bets_crash_cashout')">
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label col-md-3">Ставки в дайсе</label>
+												<div class="col-md-9">
+													<select class="form-control" id="bot_dice" v-on:change="changeBot('bot_dice')">
+														<option value="1">Да</option>
+														<option value="0">Нет</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group" v-if="paths.bot.dice">
+												<label class="control-label col-md-3">Суммы ставок в дайсе</label>
+												<div class="col-md-9">
+													<input type="text" id="bets_dice" class="form-control"  v-bind:value="paths.bot.bets_dice" v-on:input="changeBot('bets_dice')">
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label col-md-3">Ставки в джекпоте</label>
+												<div class="col-md-9">
+													<select class="form-control" id="bot_jackpot" v-on:change="changeBot('bot_jackpot')">
+														<option value="1">Да</option>
+														<option value="0">Нет</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group" v-if="paths.bot.jackpot">
+												<label class="control-label col-md-3">Суммы ставок в джекпоте</label>
+												<div class="col-md-9">
+													<input type="text" id="bets_jackpot" class="form-control"  v-bind:value="paths.bot.bets_jackpot" v-on:input="changeBot('bets_jackpot')">
+												</div>
+											</div>
+											<div class="form-group mb-0">
+												<div class="col-sm-offset-3 col-sm-9">
+													<button class="btn btn-success" type="submit" v-on:click="saveBot">Сохранить</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="panel panel-default border-panel card-view">
+									<div class="panel-heading">
+										<div class="pull-left">
+											<h6 class="panel-title txt-dark">Последние ставки</h6>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="panel-wrapper collapse in">
+										<div class="panel-body">
+											<div class="table-wrap">
+												<div class="table-responsive">
+													<table class="table mb-0">
+														<thead>
+															<td>
+																<th>Кому</th>
+																<th>Сумма</th>
+																<th>Дата</th>
+															</td>
+														</thead>
+														<tbody>
+
+
+
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="container pt-30" v-if="template == 'withdraw'">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="panel panel-default border-panel card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">
+										Активные запросы
+									</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<table id="" class="table table-hover display  pb-30 withdraw_table1" role="grid" aria-describedby="datable_1_info">
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>Пользователь</th>
+												<th>Сумма</th>
+												<th>Система</th>
+												<th>Кошелек</th>
+												<th>Действия</th>
+											</tr>
+										</thead>
+										<tbody>
+											
+											<tr v-for="(w, index) in paths.withdraw.money" v-if="w.status == 0">
+												<td>@{{ w.id }}</td>
+												<td><a v-on:click="react('/admin/users/' + w.user_id)"><img v-bind:src="w.user.avatar" style="width:50px;border-radius:50%;margin-right:10px;vertical-align:middle;"> @{{ w.user.username }}</a></td>
+												<td>@{{ w.amount }}р</td>
+												<td v-if="w.method == 63">Qiwi</td>
+												<td v-if="w.method == 45">Yandex Money</td>
+												<td v-if="w.method == 1">Web Money WMR</td>
+												<td v-if="w.method == 114">Payeer RUB</td>
+												<td v-if="w.method == 94">Visa/MasterCard RUB</td>
+												<td v-if="w.method == 82">Мегафон</td>
+												<td v-if="w.method == 132">Tele2</td>
+												<td v-if="w.method == 83">Beeline</td>
+												<td v-if="w.method == 82">МТС</td>
+												<td>@{{ w.info.wallet }}</td>
+												<td class="text-center"><a v-on:click="acceptWithdraw(w.id, index, false)" class="btn btn-primary btn-rounded btn-xs">Отправить</a><a v-on:click="acceptWithdraw(w.id, index, true)" class="btn btn-primary btn-rounded btn-xs">Отправить API</a>
+													<a v-on:click="cancelWithdraw(w.id, index)" class="btn btn-danger btn-rounded btn-xs" v-if="!w.canceling">Вернуть</a>
+													<a class="btn btn-danger btn-rounded btn-xs" style="opacity : 0.5;" v-if="w.canceling">Возвращаем..</a>
+												</td>
+											</tr>
+											
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>ID</th>
+												<th>Пользователь</th>
+												<th>Сумма</th>
+												<th>Система</th>
+												<th>Кошелек</th>
+												<th>Действия</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div class="panel panel-default border-panel card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">
+										Активные запросы на предметы
+									</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<table id="" class="table table-hover display  pb-30 withdraw_table3" role="grid" aria-describedby="datable_1_info">
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>Пользователь</th>
+												<th>Предметы</th>
+												<th>Сумма</th>
+												<th>Игра</th>
+												<th>Действия</th>
+											</tr>
+										</thead>
+										<tbody>
+											
+											<tr v-for="(w, index) in paths.withdraw.skins" v-if="w.status == 1 || (w.appid == 'real' && w.status < 5)">
+												<td>@{{ w.id }}</td>
+												<td><a v-on:click="react('/admin/users/' + w.user.id)"><img v-bind:src="w.user.avatar" style="width:50px;border-radius:50%;margin-right:10px;vertical-align:middle;"> @{{ w.user.username }}</a></td>
+												<td>
+													<span v-for="item in w.items" style="display: block;width: 100%;height: 30px;line-height: 30px;">
+														<img v-bind:src="item.icon_url" alt="" style="width: 25px;float: left;margin-right: 5px;margin-top: 2px;"> @{{ (w.appid == 'real') ? item.mhn : item.market_hash_name }} - @{{ item.price }}руб.
+													</span>
+												</td>
+												<td>@{{ w.price }}р</td>
+												<td>@{{ w.game }}</td>
+												<td class="text-center" v-if="w.appid == '540'">
+													<button class="btn btn-success btn-xs" style="margin : 1px 0px;" v-if="!w.accept && w.appid != 'real'" v-on:click="acceptTrade(w.id, index)">Отправлен</button>
+													<button class="btn btn-success btn-xs" style="margin : 1px 0px;" v-if="w.accept && w.appid != 'real'" style="opacity : 0.5;" style="opacity : 0.5;">Отправляем..</button>
+													<a class="btn btn-primary btn-xs" style="margin : 1px 0px;" v-if="w.appid == 540" v-bind:href="'https://steamcommunity.com/tradeoffer/new/?partner=' + w.trade.partner + '&token=' + w.trade.token" target="_blank">Обмен</a>
+													<button class="btn btn-danger btn-xs" style="margin : 1px 0px;" v-if="!w.cancel" v-on:click="cancelTrade(w.id, index)">Отклонить</button>
+													<button class="btn btn-danger btn-xs" style="margin : 1px 0px;" v-if="w.cancel" style="opacity : 0.5;">Отклоняем..</button>
+												</td>
+												<td class="text-center" v-if="w.appid == '730' || w.appid == 'vgo'">
+													<button class="btn btn-success btn-xs" style="margin : 1px 0px;" v-if="!w.accept" v-on:click="acceptTrade(w.id, index, false)">Одобрить</button>
+													<button class="btn btn-success btn-xs" style="margin : 1px 0px;" v-if="!w.accept" v-on:click="acceptTrade(w.id, index, true)">Одобрить API</button>
+													<button class="btn btn-success btn-xs" style="margin : 1px 0px;" v-if="w.accept" style="opacity : 0.5;" style="opacity : 0.5;">Одобряем..</button>
+													<button class="btn btn-danger btn-xs" style="margin : 1px 0px;" v-if="!w.cancel" v-on:click="cancelTrade(w.id, index)">Отклонить</button>
+													<button class="btn btn-danger btn-xs" style="margin : 1px 0px;" v-if="w.cancel" style="opacity : 0.5;">Отклоняем..</button>
+												</td>
+												<td class="text-center" v-if="w.appid == 'real'">
+													<button class="btn btn-primary btn-xs" style="margin : 1px 0px;" v-on:click="alert(w.trade)">Адрес доставки</button>
+													<button class="btn btn-success btn-xs" style="margin : 1px 0px;" v-if="w.status == 2" v-on:click="updateWithdrawStatus(w.id, index, 5)">Отправлен</button>
+													<button class="btn btn-success btn-xs" style="margin : 1px 0px;" v-if="w.status != 2" v-on:click="updateWithdrawStatus(w.id, index, 2)">Обработать</button>
+													<button class="btn btn-danger btn-xs" style="margin : 1px 0px;" v-if="!w.cancel && w.status != 2" v-on:click="cancelTrade(w.id, index)">Отклонить</button>
+													<button class="btn btn-danger btn-xs" style="margin : 1px 0px;" v-if="w.cancel && w.status != 2" style="opacity : 0.5;">Отклоняем..</button>
+												</td>
+											</tr>
+											
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>ID</th>
+												<th>Пользователь</th>
+												<th>Предметы</th>
+												<th>Сумма</th>
+												<th>Игра</th>
+												<th>Действия</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="panel panel-default border-panel card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">
+										Обработанные запросы
+									</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<table id="" class="table table-hover display  pb-30 withdraw_table2" role="grid" aria-describedby="datable_2_info">
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>Пользователь</th>
+												<th>Сумма</th>
+												<th>Система</th>
+												<th>Кошелек</th>
+											</tr>
+										</thead>
+										<tbody>
+										
+												<tr v-for="(w, index) in paths.withdraw.money" v-if="w.status == 1">
+														<td>@{{ w.id }}</td>
+														<td><a v-on:click="react('/admin/users/' + w.user_id)"><img v-bind:src="w.user.avatar" style="width:50px;border-radius:50%;margin-right:10px;vertical-align:middle;"> @{{ w.user.username }}</a></td>
+														<td>@{{ w.amount }}р</td>
+														<td v-if="w.method == 63">Qiwi</td>
+														<td v-if="w.method == 45">Yandex Money</td>
+														<td v-if="w.method == 1">Web Money WMR</td>
+														<td v-if="w.method == 114">Payeer RUB</td>
+														<td v-if="w.method == 94">Visa/MasterCard RUB</td>
+														<td v-if="w.method == 82">Мегафон</td>
+														<td v-if="w.method == 132">Tele2</td>
+														<td v-if="w.method == 83">Beeline</td>
+														<td v-if="w.method == 82">МТС</td>
+														<td>@{{ w.info.wallet }}</td>
+													</tr>
+											
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>ID</th>
+												<th>Пользователь</th>
+												<th>Сумма</th>
+												<th>Система</th>
+												<th>Кошелек</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12">
+							<div class="panel panel-default border-panel card-view">
+								<div class="panel-heading">
+									<div class="pull-left">
+										<h6 class="panel-title txt-dark">
+												Обработанные запросы на предметы
+										</h6>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="panel-wrapper collapse in">
+									<div class="panel-body">
+										<table id="" class="table table-hover display  pb-30 withdraw_table4" role="grid" aria-describedby="datable_1_info">
+											<thead>
+												<tr>
+													<th>ID</th>
+													<th>Пользователь</th>
+													<th>Предметы</th>
+													<th>Сумма</th>
+													<th>Игра</th>
+												</tr>
+											</thead>
+											<tbody>
+												
+												<tr v-for="(w, index) in paths.withdraw.skins" v-if="w.status > 1 && w.status < 6">
+													<td>@{{ w.id }}</td>
+													<td><a v-on:click="react('/admin/users/' + w.user.id)"><img v-bind:src="w.user.avatar" style="width:50px;border-radius:50%;margin-right:10px;vertical-align:middle;"> @{{ w.user.username }}</a></td>
+													<td>
+														<span v-for="item in w.items" style="display: block;width: 100%;height: 30px;line-height: 30px;">
+															<img v-bind:src="item.icon_url" alt="" style="width: 25px;float: left;margin-right: 5px;margin-top: 2px;"> @{{ item.market_hash_name }} - @{{ item.price }}руб.
+														</span>
+													</td>
+													<td>@{{ w.price }}р</td>
+													<td>@{{ w.game }}</td>
+												</tr>
+												
+											</tbody>
+											<tfoot>
+												<tr>
+													<th>ID</th>
+													<th>Пользователь</th>
+													<th>Предметы</th>
+													<th>Сумма</th>
+													<th>Игра</th>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+            <div class="container pt-30" v-if="template == 'index'">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-sm-12 col-xs-12">
+										<div class="panel panel-default card-view">
+											<div class="panel-heading">
+												<div class="text-center">
+													<h6 class="panel-title txt-dark">
+														Статистика пополнений
+													</h6>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="panel panel-default border-panel card-view pa-0">
+									<div class="panel-wrapper collapse in">
+										<div class="panel-body pa-0">
+											<div class="sm-data-box">
+												<div class="container-fluid">
+													<div class="row">
+														<div class="col-xs-8 text-center pl-0 pr-0 data-wrap-left">
+															<span class="txt-dark block counter">@{{ (parseFloat(paths.index.p_today) || 0).toFixed(2) }}</span> <span class="uppercase-font block">За сегодня</span>
+														</div>
+														<div class="col-xs-4 text-center pl-0 pr-0 data-wrap-right">
+															<i class="fa fa-rub data-right-rep-icon"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="panel panel-default border-panel card-view pa-0">
+									<div class="panel-wrapper collapse in">
+										<div class="panel-body pa-0">
+											<div class="sm-data-box">
+												<div class="container-fluid">
+													<div class="row">
+														<div class="col-xs-8 text-center pl-0 pr-0 data-wrap-left">
+															<span class="txt-dark block counter">@{{ (parseFloat(paths.index.p_week) || 0).toFixed(2) }}</span> <span class="uppercase-font block">За 7 дней</span>
+														</div>
+														<div class="col-xs-4 text-center pl-0 pr-0 data-wrap-right">
+															<i class="fa fa-rub data-right-rep-icon"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="panel panel-default border-panel card-view pa-0">
+									<div class="panel-wrapper collapse in">
+										<div class="panel-body pa-0">
+											<div class="sm-data-box">
+												<div class="container-fluid">
+													<div class="row">
+														<div class="col-xs-8 text-center pl-0 pr-0 data-wrap-left">
+															<span class="txt-dark block counter">@{{ (parseFloat(paths.index.p_month) || 0).toFixed(2) }}</span> <span class="uppercase-font block">За месяц</span>
+														</div>
+														<div class="col-xs-4 text-center pl-0 pr-0 data-wrap-right">
+															<i class="fa fa-rub data-right-rep-icon"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="panel panel-default border-panel card-view pa-0">
+									<div class="panel-wrapper collapse in">
+										<div class="panel-body pa-0">
+											<div class="sm-data-box">
+												<div class="container-fluid">
+													<div class="row">
+														<div class="col-xs-8 text-center pl-0 pr-0 data-wrap-left">
+															<span class="txt-dark block counter">@{{ (parseFloat(paths.index.p_all) || 0).toFixed(2) }}</span> <span class="uppercase-font block">За все время</span>
+														</div>
+														<div class="col-xs-4 text-center pl-0 pr-0 data-wrap-right">
+															<i class="fa fa-rub data-right-rep-icon"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="panel panel-default border-panel card-view pa-0">
+									<div class="panel-wrapper collapse in">
+										<div class="panel-body pa-0">
+											<div class="sm-data-box">
+												<div class="container-fluid">
+													<div class="row">
+														<div class="col-xs-8 text-center pl-0 pr-0 data-wrap-left">
+															<span class="txt-dark block counter">@{{ paths.index.freekassa_balance }}</span> <span class="uppercase-font block">На кошельке</span>
+														</div>
+														<div class="col-xs-4 text-center pl-0 pr-0 data-wrap-right">
+															<i class="fa fa-rub data-right-rep-icon"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="panel panel-default border-panel card-view pa-0">
+									<div class="panel-wrapper collapse in">
+										<div class="panel-body pa-0">
+											<div class="sm-data-box">
+												<div class="container-fluid">
+													<div class="row">
+														<div class="col-xs-8 text-center pl-0 pr-0 data-wrap-left">
+															<span class="txt-dark block counter">@{{ (parseFloat(paths.index.toWithdraw) || 0).toFixed(2) }}</span> <span class="uppercase-font block">На вывод</span>
+														</div>
+														<div class="col-xs-4 text-center pl-0 pr-0 data-wrap-right">
+															<i class="fa fa-rub data-right-rep-icon"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-sm-12 col-xs-12">
+										<div class="panel panel-default card-view">
+											<div class="panel-heading">
+												<div class="text-center">
+													<h6 class="panel-title txt-dark">
+														Статистика дохода
+													</h6>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="row">
+									<div class="col-sm-12 col-xs-12">
+										<div class="panel panel-default border-panel card-view">
+											<div class="panel-heading">
+												<div class="text-center">
+													<h6 class="panel-title txt-dark">Jackpot</h6>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+											<div class="panel-wrapper collapse in">
+												<div class="panel-body row">
+													<div class="text-center">
+														<div class="col-md-12 mb-5" style="font-size: 20px;"><span style="color: #22af47;">@{{ parseFloat(paths.index.jackpot.toFixed(2)) }}</span>руб.</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-2">
+									<div class="row">
+										<div class="col-sm-12 col-xs-12">
+											<div class="panel panel-default border-panel card-view">
+												<div class="panel-heading">
+													<div class="text-center">
+														<h6 class="panel-title txt-dark">Crash</h6>
+													</div>
+													<div class="clearfix"></div>
+												</div>
+												<div class="panel-wrapper collapse in">
+													<div class="panel-body row">
+														<div class="text-center">
+															<div class="col-md-12 mb-5" style="font-size: 20px;"><span style="color: #22af47;">@{{ parseFloat(paths.index.crash.toFixed(2)) }}</span>руб.</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							<div class="col-sm-2">
+								<div class="row">
+									<div class="col-sm-12 col-xs-12">
+										<div class="panel panel-default border-panel card-view">
+											<div class="panel-heading">
+												<div class="text-center">
+													<h6 class="panel-title txt-dark">Dice</h6>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+											<div class="panel-wrapper collapse in">
+												<div class="panel-body row">
+													<div class="text-center">
+														<div class="col-md-12 mb-5" style="font-size: 20px;"><span style="color: #22af47;">@{{ parseFloat(paths.index.dice.toFixed(2)) }}</span>руб.</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="row">
+									<div class="col-sm-12 col-xs-12">
+										<div class="panel panel-default border-panel card-view">
+											<div class="panel-heading">
+												<div class="text-center">
+													<h6 class="panel-title txt-dark">Перевод</h6>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+											<div class="panel-wrapper collapse in">
+												<div class="panel-body row">
+													<div class="text-center">
+														<div class="col-md-12 mb-5" style="font-size: 20px;"><span style="color: #22af47;">@{{ parseFloat(paths.index.send.toFixed(2)) }}</span>руб.</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="row">
+											<div class="col-sm-12 col-xs-12">
+												<div class="panel panel-default border-panel card-view">
+													<div class="panel-heading">
+														<div class="text-center">
+															<h6 class="panel-title txt-dark">Общий профит (за сегодня)</h6>
+														</div>
+														<div class="clearfix"></div>
+													</div>
+													<div class="panel-wrapper collapse in">
+														<div class="panel-body row">
+															<div class="text-center">
+																<div class="col-md-12 mb-5" style="font-size: 20px;"><span class="text-success">@{{ parseFloat((paths.index.jackpot+paths.index.crash+paths.index.dice+paths.index.send).toFixed(2)) }}</span>руб.</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="panel panel-default border-panel card-view">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pa-0">
+									<div class="chat-cmplt-wrap">
+										<div class="recent-chat-wrap">
+											<div class="panel-heading">
+												<div class="text-center">
+													<h6 class="panel-title txt-dark">Пользователи онлайн (@{{ paths.index.online.users.length }}) Соединений : @{{ paths.index.online.connections }}</h6>
+												</div> 
+												<div class="clearfix"></div>
+											</div>
+											<div class="panel-wrapper collapse in">
+													<div class="panel-body">
+														<table class="table table-hover display pb-30">
+															<thead>
+																<tr>
+																	<th>ID</th>
+																	<th>Пользователь</th>
+																	<th>Баланс</th>
+																	<th>Профиль</th>
+																	<th>Привилегии</th>
+																	<th>IP Адрес</th>
+																	<th>Бан</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr v-for="u in paths.index.online.users" v-if="paths.index.online.users.length > 0">
+																		<td>@{{ u.user.id }}</td>
+																		<td style="line-height: 31px;">
+																			<a v-on:click="react('/admin/users/' + u.user.id)">
+																					<img v-bind:src="u.user.avatar" alt="" width="30px" height="30px" style="float : left; border-radius : 50%; margin-right : 10px;"> @{{u.user.username}}
+																			</a>
+																		</td>
+																		<td>@{{ parseFloat(u.user.balance.toFixed(2)) }}</td>
+																		<td>
+																			<a v-bind:href="u.user.profile_url" target="_blank" v-if="u.user.method !== 'local'">Профиль</a>
+																			<span v-else>-</span>
+																		</td>
+																		<td>
+																			<span v-if="u.user.is_admin == 2">Администратор</span>
+																			<span v-else-if="u.user.is_admin == 1">Модератор</span>
+																			<span v-else-if="u.user.youtube.active">Ютубер</span>
+																			<span v-else-if="u.user.vip">Вип</span>
+																			<span v-else-if="u.user.is_admin == 0">Пользователь</span>
+																		</td>
+																		<td v-if="u.user.ips.length > 0">
+																			<span v-for="ip in u.user.ips">@{{ ip + ' ' }}</span>
+																			<span v-if="u.user.ips.length == 0">-</span>
+																		</td>
+																		<td v-if="u.user.ips.length == 0">-</td>
+																		<td>
+																			<span v-if="u.user.ban.active">@{{ u.ban.reason }}</span>
+																			<span v-else>-</span>
+																		</td>
+																</tr>
+															</tbody>
+															<tfoot>
+																<tr>
+																	<th>ID</th>
+																	<th>Пользователь</th>
+																	<th>Баланс</th>
+																	<th>Профиль VK</th>
+																	<th>Привилегии</th>
+																	<th>IP Адрес</th>
+																	<th>Бан</th>
+																</tr>
+															</tfoot>
+														</table>
+													</div>
+												</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+				<div class="col-sm-4">
+						<div class="row">
+							<div class="col-sm-12 col-xs-12">
+								<div class="panel panel-default border-panel card-view">
+									<div class="panel-heading">
+										<div class="text-center">
+											<h6 class="panel-title txt-dark">Топ богачей</h6>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="panel-wrapper collapse in" style="height: 370px; overflow-x: hidden;">
+										<div class="panel-body row pa-0">
+											<table class="table table-hover mb-0">
+												<thead>
+													<tr>
+														<th></th>
+														<th>Пользователь</th>
+														<th>Баланс</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr v-for="u in paths.index.top_users">
+														<td><img v-bind:src="u.avatar" width="35px" class="img-circle" v-on:click="react('/admin/users/' + u.id)"></td>
+														<td><a v-on:click="react('/admin/users/' + u.id)">@{{ u.username }}</a></td>
+														<td>@{{ parseFloat(u.balance.toFixed(2)) }}р.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="row">
+							<div class="col-sm-12 col-xs-12">
+								<div class="panel panel-default border-panel card-view">
+									<div class="panel-heading">
+										<div class="text-center">
+											<h6 class="panel-title txt-dark">Последние пополнения</h6>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="panel-wrapper collapse in" style="height: 370px; overflow-x: hidden;">
+										<div class="panel-body row pa-0">
+											<table class="table table-hover mb-0">
+												<thead>
+													<tr>
+														<th></th>
+														<th>Пользователь</th>
+														<th>Сумма</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr v-for="d in paths.index.last_deps">
+														<td><img v-bind:src="d.avatar" width="35px" class="img-circle" v-on:click="react('/admin/users/' + d.id)"></td>
+														<td><a v-on:click="react('/admin/users/' + d.id)">@{{ d.username }}</a></td>
+														<td>@{{ d.amount }}р.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="row">
+							<div class="col-sm-12 col-xs-12">
+								<div class="panel panel-default border-panel card-view">
+									<div class="panel-heading">
+										<div class="text-center">
+											<h6 class="panel-title txt-dark">Последние пользователи</h6>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="panel-wrapper collapse in" style="height: 370px; overflow-x: hidden;">
+										<div class="panel-body row pa-0">
+											<table class="table table-hover mb-0">
+												<thead>
+													<tr>
+														<th></th>
+														<th>Пользователь</th>
+														<th>Регистрация</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr v-for="u in paths.index.last_users">
+														<td><img v-bind:src="u.avatar" width="35px" class="img-circle" v-on:click="react('/admin/users/' + u.id)"></td>
+														<td><a v-on:click="react('/admin/users/' + u.id)">@{{ u.username }}</a></td>
+														<td>@{{ new Date(u.createdAt).toLocaleDateString() + ' в ' + new Date(u.createdAt).toLocaleTimeString()  }}</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="row">
+							<div class="col-sm-12 col-xs-12">
+								<div class="panel panel-default border-panel card-view">
+									<div class="panel-heading">
+										<div class="text-center">
+											<h6 class="panel-title txt-dark">Джекпот</h6>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="panel-wrapper collapse in" style="height: 370px; overflow-x: hidden;">
+										<div class="panel-body row pa-0">
+											<table class="table table-hover mb-0">
+												<thead>
+													<tr>
+														<th></th>
+														<th>Пользователь</th>
+														<th>Подкрутка</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr v-for="(d, index) in paths.index.jackpot_bets" v-if="d.id == paths.index.jackpot_id">
+														<td><img v-bind:src="d.user.avatar" width="35px" class="img-circle" v-on:click="react('/admin/users/' + d.user_id)"></td>
+														<td><a v-on:click="react('/admin/users/' + d.user_id)">@{{ d.user.username }}</a></td>
+														<td>
+                                                            <button class="btn btn-success" v-if="!d.disableButton" v-on:click="jackpotSetWinner(index, d.user_id)">Подкрутить</button>
+                                                            <button class="btn btn-success" v-if="d.disableButton" style="opacity : 0.5;">Подкручиваем..</button>
+                                                        </td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="panel panel-default border-panel card-view">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pa-0">
+									<div class="chat-cmplt-wrap">
+										<div class="recent-chat-wrap">
+											<div class="panel-heading">
+												<div class="text-center">
+													<h6 class="panel-title txt-dark"><span v-on:click="paths.index.chatln = 'ru'">RU</span> | <span v-on:click="paths.index.chatln = 'en'">EN</span></h6>
+												</div>
+												<div class="clearfix"></div>
+											</div>
+											<div class="panel-wrapper collapse in">
+												<div class="panel-body">
+													<div class="chat-content">
+														<ul class="chatapp-chat-nicescroll-bar pt-20" style="overflow: hidden; width: auto; height: 483px;">
+
+															<li class="friend" v-for="msg in paths.index.chat" v-if="msg.lang == paths.index.chatln">
+																<div class="friend-msg-wrap">
+																	<img class="user-img img-circle block pull-left" v-bind:src="msg.user.avatar" alt="user">
+																	<div class="msg pull-left">
+																		<p>@{{ msg.user.username }}</p>
+																		<div class="msg-per-detail text-right">
+																			<span class="msg-time txt-light">@{{ msg.message }}</span>
+																		</div>
+																	</div>
+																	<div class="clearfix"></div>
+																</div>	
+															</li>
+														</ul>
+													</div>
+													<form id="adminChatForm" v-on:submit="sendMessage">
+													<div class="form-group" style="margin-top: 10px;">
+														<label>Выбрать пользователя</label>
+														<select class="form-control" id="botID">
+															
+																<option v-for="bot in paths.index.bots" v-bind:value="bot.id">@{{ bot.username }}</option>
+															
+														</select>
+													</div>
+													<div class="input-group">
+																<input type="text" id="chatmessage" name="chatmess" class="input-msg-send form-control" placeholder="Написать сообщение">
+																<div class="input-group-btn attachment">
+																	<button type="submit" class="fileupload btn  btn-default"><i class="ti-shift-right" id="chatsend" v-on:click="sendMessage"></i></button>
+																</div>
+													</div>
+												</form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container pt-30" v-if="template == 'alerts'">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="panel panel-default border-panel card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">
+										Добавить баннер
+									</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<div class="form-wrap">
+										<form v-on:submit="createAlert" id="createAlertForm">
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label class="col-sm-12 control-label">Текст на русском языке</label>
+														<div class="col-sm-12">
+															<textarea type="text" class="form-control" name="ru" value="" id="alert_ru"></textarea>
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label class="col-sm-12 control-label">Текст на английском языке</label>
+														<div class="col-sm-12">
+															<textarea type="text" class="form-control" name="en" value="" id="alert_en"></textarea>
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-12">
+													<div class="form-group">
+														<div class="col-sm-12 col-md-12 col-xs-12">
+															<button class="btn btn-success" type="submit" style="width : 100%; margin-top : 10px;" v-if="!paths.alerts.create">Создать</button>
+															<button class="btn btn-success"  style="width : 100%; margin-top : 10px; opacity : 0.5;" v-if="paths.alerts.create">Создаем..</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="panel panel-default border-panel card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">
+										Список баннеров
+									</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<table class="table table-hover display  pb-30 users_table">
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>Русский</th>
+												<th>Английский</th>
+												<th>Действия</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr v-for="(alert, index) in paths.alerts.list">
+												<td>@{{ alert.id }}</td>
+												<td>@{{ alert.ru }}</td>
+												<td>@{{ alert.en }}</td>
+												<td>
+													<button class="btn btn-xs btn-danger" v-if="!alert.delete" v-on:click="deleteAlert(alert.id, index)">Удалить</button>	
+													<button class="btn btn-xs btn-danger" v-if="alert.delete" style="opacity : 0.5;">Удаляем..</button>	
+												</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>ID</th>
+												<th>Русский</th>
+												<th>Английский</th>
+												<th>Действия</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container pt-30" v-if="template == 'users'">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="panel panel-default border-panel card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">
+										Пользователи
+									</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<table class="table table-hover display  pb-30 users_table">
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>Пользователь</th>
+												<th>Баланс</th>
+												<th>Профиль</th>
+												<th>Привилегии</th>
+												<th>IP Адрес</th>
+												<th>Бан</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr v-for="user in paths.users">
+												<td>@{{ user.id }}</td>
+												<td style="line-height: 31px;">
+													<a v-on:click="react('/admin/users/' + user.id)">
+															<img v-bind:src="user.avatar" alt="" width="30px" height="30px" style="float : left; border-radius : 50%; margin-right : 10px;"> @{{user.username}}
+													</a>
+												</td>
+												<td>@{{ parseFloat(user.balance.toFixed(2)) }}</td>
+												<td>
+													<a v-bind:href="user.profile_url" target="_blank" v-if="user.method !== 'local'">Профиль</a>
+													<span v-else>-</span>
+												</td>
+												<td>
+													<span v-if="user.is_admin == 2">Администратор</span>
+													<span v-else-if="user.is_admin == 1">Модератор</span>
+													<span v-else-if="user.youtube.active">Ютубер</span>
+													<span v-else-if="user.vip">Вип</span>
+													<span v-else-if="user.is_admin == 0">Пользователь</span>
+												</td>
+												<td>@{{ user.ips }}</td>
+												<td>
+													<span v-if="user.ban.active">@{{ user.ban.reason }}</span>
+													<span v-else>-</span>
+												</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>ID</th>
+												<th>Пользователь</th>
+												<th>Баланс</th>
+												<th>Профиль VK</th>
+												<th>Привилегии</th>
+												<th>IP Адрес</th>
+												<th>Бан</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container pt-30" v-if="template == 'payments'">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="panel panel-default border-panel card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">
+										Пополнения
+									</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<table class="table table-hover display  pb-30 users_table">
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>Пользователь</th>
+												<th>Баланс до</th>
+												<th>Сумма</th>
+												<th>Предметы</th>
+												<th>Баланс после</th>
+												<th>Дата</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr v-for="p in paths.payments.list">
+												<td>@{{ p.id }}</td>
+												<td style="line-height: 31px;">
+													<a v-on:click="react('/admin/users/' + p.user.id)">
+															<img v-bind:src="p.user.avatar" alt="" width="30px" height="30px" style="float : left; border-radius : 50%; margin-right : 10px;"> @{{p.user.username}}
+													</a>
+												</td>
+												<td>@{{ p.bal1 }}</td>
+												<td>@{{ p.amount }}</td>
+												<td v-if="p.items"><img v-for="item in p.items" v-bind:src="item.icon_url" alt="" style="width: 25px;float: left;margin-right: 5px;margin-top: 2px;" v-bind:title="item.market_hash_name + ' - ' + item.price + 'руб.'"></td>
+												<td v-if="!p.items">-</td>
+												<td>@{{ p.bal2 }}</td>
+												<td>@{{ new Date(p.date).toLocaleString().replace(', ', ' в ') }}</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>ID</th>
+												<th>Пользователь</th>
+												<th>Баланс до</th>
+												<th>Сумма</th>
+												<th>Предметы</th>
+												<th>Баланс после</th>
+												<th>Дата</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container pt-30" v-if="template == 'settings'">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="panel panel-default card-view pa-0">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pb-0">
+									<div class="form-wrap">
+										<form class="form-horizontal">
+											<div class="tab-struct custom-tab-1">
+												<ul class="nav nav-tabs nav-tabs-responsive" id="myTabs_8" role="tablist">
+													<li class="active" role="presentation">
+														<a aria-expanded="true" data-toggle="tab" href="#site" id="profile_tab_8" role="tab"><span>Сайт</span></a>
+													</li>
+													<li class="next" role="presentation">
+														<a aria-expanded="false" data-toggle="tab" href="#dice" id="photos_tab_8" role="tab"><span>Дайс</span></a>
+													</li>
+													<li class="" role="presentation">
+														<a aria-expanded="false" data-toggle="tab" href="#jackpot" id="earning_tab_8" role="tab"><span>Джекпот</span></a>
+													</li>
+													<li class="" role="presentation">
+														<a aria-expanded="false" data-toggle="tab" href="#crash" id="earning_tab_8" role="tab"><span>Краш</span></a>
+													</li>
+													<li class="" role="presentation">
+															<a aria-expanded="false" data-toggle="tab" href="#chat" id="earning_tab_9" role="tab"><span>Чат</span></a>
+														</li>
+													<li class="" role="presentation">
+														<a aria-expanded="false" data-toggle="tab" href="#etc" id="earning_tab_9" role="tab"><span>Ограничения</span></a>
+													</li>
+												</ul>
+												<div class="tab-content pa-15" id="myTabContent_8">
+													<div class="tab-pane fade active in" id="site" role="tabpanel">
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Домен</label>
+																<input type="text" class="form-control" name="domain" v-bind:value="paths.settings.domain" placeholder="Домен" v-on:input="changeSettings">
+															</div>
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Название</label>
+																<input type="text" class="form-control" name="sitename" v-bind:value="paths.settings.sitename" placeholder="Домен" v-on:input="changeSettings">
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Описание</label>
+																<input type="text" class="form-control" name="descriptions" v-bind:value="paths.settings.descriptions" placeholder="Описание" v-on:input="changeSettings">
+															</div>
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Ключи</label>
+																<input type="text" class="form-control" name="keywords" v-bind:value="paths.settings.keywords" placeholder="Ключи" v-on:input="changeSettings">
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">ID Магазина FK</label>
+																<input type="text" class="form-control" name="freekassa_id" v-bind:value="paths.settings.freekassa_id" placeholder="ID Магазина FK" v-on:input="changeSettings">
+															</div>
+															<div class="col-sm-6">
+																<label class="control-label mb-10">FK Кошелек</label>
+																<input type="text" class="form-control" name="fkwallet_id" v-bind:value="paths.settings.fkwallet_id" placeholder="FK Кошелек" v-on:input="changeSettings">
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">FK Secret 1</label>
+																<input type="text" class="form-control" name="freekassa_secret1" v-bind:value="paths.settings.freekassa_secret1" placeholder="FK Secret 1" v-on:input="changeSettings">
+															</div>
+															<div class="col-sm-6">
+																<label class="control-label mb-10">FK Secret 2</label>
+																<input type="text" class="form-control" name="freekassa_secret2" v-bind:value="paths.settings.freekassa_secret2" placeholder="FK Secret 2" v-on:input="changeSettings">
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">FK API Key</label>
+																<input type="text" class="form-control" name="fkwallet_api" v-bind:value="paths.settings.fkwallet_api" placeholder="FK API Key" v-on:input="changeSettings">
+															</div>
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Курс доллара</label>
+																<input type="text" class="form-control" name="usd" v-bind:value="paths.settings.usd" placeholder="USD value" v-on:input="changeSettings">
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Группа ВК</label>
+																<input type="text" class="form-control" name="vkgroup" v-bind:value="paths.settings.vkgroup" placeholder="VK Group" v-on:input="changeSettings">
+															</div>
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Запись ВК</label>
+																<input type="text" class="form-control" name="vkpost" v-bind:value="paths.settings.vkpost" placeholder="VK Post" v-on:input="changeSettings">
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Сообщения ВК</label>
+																<input type="text" class="form-control" name="vksend" v-bind:value="paths.settings.vksend" placeholder="VK Message" v-on:input="changeSettings">
+															</div>
+														</div>
+													</div>
+													<div class="tab-pane fade in" id="jackpot" role="tabpanel">
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Таймер</label>
+																<input type="text" class="form-control" name="jackpot_timer" v-bind:value="paths.settings.jackpot_timer" placeholder="Таймер" v-on:input="changeSettings">
+															</div>
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Комиссия игры</label>
+																<input type="text" class="form-control" name="jackpot_comission" v-bind:value="paths.settings.jackpot_comission" placeholder="Комиссия игры" v-on:input="changeSettings">
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Минимальная ставка</label>
+																<input type="text" class="form-control" name="jackpot_min_bet" v-bind:value="paths.settings.jackpot_min_bet" placeholder="Минимальная ставка" v-on:input="changeSettings">
+															</div>
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Максимальная ставка</label>
+																<input type="text" class="form-control" name="jackpot_max_bet" v-bind:value="paths.settings.jackpot_max_bet" placeholder="Максимальная ставка" v-on:input="changeSettings">
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Максимальное кол-во ставок за игру (0 - выкл)</label>
+																<input type="text" class="form-control" name="jackpot_maxbets" v-bind:value="paths.settings.jackpot_maxbets" placeholder="Максимальное кол-во ставок за игру" v-on:input="changeSettings">
+															</div>
+														</div>
+													</div>
+													<div class="tab-pane fade in" id="crash" role="tabpanel">
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Таймер</label>
+																<input type="text" class="form-control" name="crash_timer" v-bind:value="paths.settings.crash_timer" placeholder="Таймер" v-on:input="changeSettings">
+															</div>
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Минимальная ставка</label>
+																<input type="text" class="form-control" name="crash_min_bet" v-bind:value="paths.settings.crash_min_bet" placeholder="Минимальная ставка" v-on:input="changeSettings">
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Максимальная ставка</label>
+																<input type="text" class="form-control" name="crash_max_bet" v-bind:value="paths.settings.crash_max_bet" placeholder="Максимальная ставка" v-on:input="changeSettings"> 
+															</div>
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Максимальное кол-во ставок за игру (0 - выкл)</label>
+																<input type="text" class="form-control" name="crash_bets" v-bind:value="paths.settings.crash_bets" placeholder="Максимальное кол-во ставок за игру" v-on:input="changeSettings">
+															</div>
+														</div>
+													</div>
+													<div class="tab-pane fade in" id="dice" role="tabpanel">
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Минимальная ставка</label>
+																<input type="text" class="form-control" name="dice_min_bet" v-bind:value="paths.settings.dice_min_bet" placeholder="Минимальная ставка" v-on:input="changeSettings">
+															</div>
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Максимальная ставка</label>
+																<input type="text" class="form-control" name="dice_max_bet" v-bind:value="paths.settings.dice_max_bet" placeholder="Максимальная ставка" v-on:input="changeSettings">
+															</div>
+														</div>
+													</div>
+													<div class="tab-pane fade in" id="chat" role="tabpanel">
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Минимальное кол-во символов в чате</label>
+																<input type="text" class="form-control" name="chat_min" v-bind:value="paths.settings.chat_min" placeholder="Минимальное кол-во символов в чате" v-on:input="changeSettings">
+															</div>
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Максимальное кол-во символов в чате</label>
+																<input type="text" class="form-control" name="chat_max" v-bind:value="paths.settings.chat_max" placeholder="Максимальная кол-во символов в чате" v-on:input="changeSettings">
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Минимальная сумма розыгрыша</label>
+																<input type="text" class="form-control" name="giveaway_min" v-bind:value="paths.settings.giveaway_min" placeholder="Минимальная сумма" v-on:input="changeSettings">
+															</div>
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Максимальная сумма розыгрыша (0 выкл)</label>
+																<input type="text" class="form-control" name="giveaway_max" v-bind:value="paths.settings.giveaway_max" placeholder="Сумма депозитов" v-on:input="changeSettings">
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Вип сообщение на русском языке</label>
+																<input type="text" class="form-control" name="vip_message_ru" v-bind:value="paths.settings.vip_message_ru" placeholder="Вип сообщение RU {amount} {btn}" v-on:input="changeSettings">
+															</div>
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Вип сообщение на английском языке</label>
+																<input type="text" class="form-control" name="vip_message_en" v-bind:value="paths.settings.vip_message_en" placeholder="Вип сообщение EN {amount} {btn}" v-on:input="changeSettings">
+															</div>
+														</div>
+													</div>
+													<div class="tab-pane fade in" id="etc" role="tabpanel">
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Минимальная сумма перевода</label>
+																<input type="text" class="form-control" name="send_min" v-bind:value="paths.settings.send_min" placeholder="Минимальная сумма" v-on:input="changeSettings">
+															</div>
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Сумма депозитов для перевода</label>
+																<input type="text" class="form-control" name="dep_before_send" v-bind:value="paths.settings.dep_before_send" placeholder="Сумма депозитов" v-on:input="changeSettings">
+															</div>
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Комиссия при переводе</label>
+																<input type="text" class="form-control" name="send_comission" v-bind:value="paths.settings.send_comission" placeholder="Комиссия" v-on:input="changeSettings">
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Минимальная сумма вывода</label>
+																<input type="text" class="form-control" name="withdraw_min" v-bind:value="paths.settings.withdraw_min" placeholder="Минимальная сумма" v-on:input="changeSettings">
+															</div>
+															<div class="col-sm-6">
+																<label class="control-label mb-10">Сумма депозитов для вывода</label>
+																<input type="text" class="form-control" name="dep_before_withdraw" v-bind:value="paths.settings.dep_before_withdraw" placeholder="Сумма депозитов" v-on:input="changeSettings">
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="col-sm-12 col-md-12 col-xs-12">
+													<button class="btn btn-success" type="submit" v-on:click="settingsSave" style="width : 100%;">Сохранить</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container pt-30" v-if="template == 'user'">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="panel panel-default card-view">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<div class="profile-box">
+										<div class="profile-info text-center mb-15">
+											<div class="profile-img-wrap">
+												<img alt="user" class="inline-block mb-10" v-bind:src="paths.user.avatar">
+											</div>
+											<h5 class="block mt-10 weight-500 capitalize-font txt-dark">
+												@{{ paths.user.username }}
+											</h5>
+											<h6 class="block capitalize-font" v-if="paths.user.is_admin == 2">Администратор</h6>
+											<h6 class="block capitalize-font" v-if="paths.user.is_admin == 0">Пользователь</h6>
+											<h6 class="block capitalize-font" v-if="paths.user.is_admin == 1">Модератор</h6>
+										</div>
+
+										<div class="social-info">
+											<div class="row">
+												<div class="col-xs-6 text-center">
+													<span class="counts block head-font">@{{ parseFloat(paths.user.deposits.toFixed(2)) }}р</span> <span class="counts-text block">сумма пополнений</span>
+												</div>
+												<div class="col-xs-6 text-center">
+													<span class="counts block head-font">@{{ parseFloat(paths.user.withdrawsSuccess.toFixed(2)) }}р (@{{ parseFloat(paths.user.withdrawWait.toFixed(2)) }}р)</span> <span class="counts-text block">сумма выводов</span>
+												</div>
+											</div>
+										</div>
+										<div class="social-info">
+											<h6 class="block capitalize-font text-center">
+												Бонусы
+											</h6>
+											<div class="row">
+												<div class="col-xs-6 text-center">
+													<span class="counts block head-font">@{{ parseFloat(paths.user.bonus.price.toFixed(2)) }}р</span> <span class="counts-text block">сумма полученных бонусов</span>
+												</div>
+												<div class="col-xs-6 text-center">
+													<span class="counts block head-font">@{{ parseFloat(paths.user.refs.price.toFixed(2)) }}р</span> <span class="counts-text block">сумма за приглашенных рефералов</span>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="panel panel-default card-view">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body">
+									<div class="form-wrap">
+										<form class="form-horizontal">
+											<input name="id" value="0" type="hidden">
+											<div class="form-group">
+												<label class="col-sm-3 control-label">Имя пользователя</label>
+												<div class="col-sm-9">
+													<input type="text" class="form-control" name="username" v-bind:value="paths.user.username" readonly>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">IP адрес</label>
+												<div class="col-sm-9">
+													<input type="text" class="form-control" name="username" v-bind:value="paths.user.ips" readonly>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">Баланс</label>
+												<div class="col-sm-9">
+													<input type="text" class="form-control" id="balance"  v-bind:value="paths.user.balance" id="balance">
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">Профиль</label>
+												<div class="col-sm-9">
+													<input type="text" class="form-control"  v-bind:value="paths.user.profile_url" readonly>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-md-3">Привилегии</label>
+												<div class="col-md-9">
+													<select class="form-control" id="is_admin" v-on:change="changeUser('is_admin')">
+														<option value="2">Администратор</option>
+														<option value="1">Модератор</option>
+														<option value="0">Пользователь</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-md-3">Вип</label>
+												<div class="col-md-9">
+													<select class="form-control" id="vip" v-on:change="changeUser('vip')">
+														<option value="1">Да</option>
+														<option value="0">Нет</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="control-label col-md-3">Ютубер</label>
+												<div class="col-md-9">
+													<select class="form-control" id="youtube" v-on:change="changeUser('youtube')">
+														<option value="1">Да</option>
+														<option value="0">Нет</option>
+													</select> 
+												</div>
+											</div>
+
+											<div class="form-group" v-if="paths.user.youtube.active">
+												<label class="control-label col-md-3">Ссылка на канал</label>
+												<div class="col-md-9">
+													<input type="text" id="href" class="form-control"  v-bind:value="paths.user.youtube.href" v-on:input="changeUser('href')">
+												</div>
+											</div>
+
+<!--
+														<option value="youtuber">YouTube</option>
+														<option value="vip">VIP</option>
+-->
+
+											<div class="form-group">
+												<label class="control-label col-md-3">Забанен</label>
+												<div class="col-md-9">
+													<select class="form-control" id="ban" v-on:change="changeUser('ban')">
+														<option value="1">Да</option>
+														<option value="0">Нет</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="form-group" v-if="paths.user.ban.active">
+												<label class="control-label col-md-3">Причина блокировки</label>
+												<div class="col-md-9">
+													<input type="text" id="ban_reason" class="form-control"  v-bind:value="paths.user.ban.reason" v-on:input="changeUser('ban_reason')">
+												</div>
+											</div>
+											<div class="form-group mb-0">
+												<div class="col-sm-offset-3 col-sm-9">
+													<button class="btn btn-success" type="submit" v-on:click="saveUser">Сохранить</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="panel panel-default border-panel card-view">
+									<div class="panel-heading">
+										<div class="pull-left">
+											<h6 class="panel-title txt-dark">Переводы</h6>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="panel-wrapper collapse in">
+										<div class="panel-body">
+											<div class="table-wrap">
+												<div class="table-responsive">
+													<table class="table mb-0">
+														<thead>
+														<tr>
+															<th>Кому</th>
+															<th>Сумма</th>
+															<th>Дата</th>
+														</tr>
+														</thead>
+														<tbody>
+
+														<tr v-for="send in paths.user.sends">
+															<td><a v-on:click="react('/admin/users/' + send.target_id)">@{{ send.target.username }}</a></td>
+															<td>@{{ send.amount }}</td>
+															<td>@{{ send.createdAt }}</td>
+														</tr>
+
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			
+			<!-- Footer -->
+			<footer class="footer pl-30 pr-30">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-6">
+							<p>2018 &copy; QCASH. Панель управления</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<!-- /Footer -->
+			
+		</div>
+        <!-- /Main Content -->
+
+	</div>
+    <!-- /#wrapper -->
+	
+	<!-- JavaScript -->
+	<script src="{{ domain }}public/cp/js/jquery.min.js"></script>
+	<script src="{{ domain }}public/cp/js/init.js"></script>
+	<script src="{{ domain }}public/js/notifyme.min.js"></script>
+    <script src="{{ domain }}public/cp/js/bootstrap.min.js"></script>
+    <script src="{{ domain }}public/cp/js/jquery.dataTables.min.js"></script>
+    <script src="{{ domain }}public/cp/js/jquery.slimscroll.js"></script>
+	<script src="{{ domain }}public/js/vue.min.js"></script>
+    <script src="{{ domain }}public/cp/js/adminPost.js"></script>
+</body>
+</html>

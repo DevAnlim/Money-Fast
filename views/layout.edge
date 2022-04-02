@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EBABKI - BET CSGO / DOTA2 / VGO SKINS !</title>
+	<meta name="google-site-verification" content="dVXCzpq2VZHdaU9_wGY75ORmzebHWZKJHlU1Kp34gow" />
+	<meta name="mailru-domain" content="VVoDcVW0nICRv8X1" />
+	<meta name="yandex-verification" content="66db9418cd4a9e07" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<meta content="{{ descriptions }}" name="description">
+	<meta content="{{ keywords }}" name="keywords">
+	<meta property="og:image" content="{{ domain }}public/imgkkk5.png" />
+	<meta content="" name="csrf-token">
+	<meta itemprop="name" content="EBABKI - BET CSGO / DOTA2 / VGO SKINS !">
+	<meta itemprop="description" content="CSGO / VGO / DOTA2 GAMBLING SITE">
+	<meta itemprop="image" content="http://ebabki.com/public/imgkkk5.png">
+	<script>
+		const SSL = parseInt('{{ ssl }}');
+	</script>
+	<link id="style" href="{{ domain }}public/css/style.css" rel="stylesheet">
+	<script src="{{ domain }}public/js/jquery-3.2.1.min.js"></script>
+	<script src="{{ domain }}public/js/app.js"></script>
+	<link id="fontsStyle" href="{{ domain }}public/css/fonts.css" rel="stylesheet">
+	<link rel="stylesheet" href="{{ domain }}public/css/loaderok.css?v8">
+	<link href="{{ domain }}public/css/notifyme.css" rel="stylesheet">
+	<link href="{{ domain }}public/css/checkbox-radio.css" rel="stylesheet">
+	<link href="{{ domain }}public/favicon.ico" rel="shortcut icon" type="image/x-icon">
+	<script src="{{ domain }}public/js/jquery.animateNumber.min.js"></script>
+	<script src="{{ domain }}public/js/jquery.slimscroll.min.js"></script>
+	<script src="{{ domain }}public/js/notifyme.min.js"></script>
+	<script src="{{ domain }}public/js/jquery.kinetic.min.js"></script>
+	<script src="{{ domain }}public/js/cookie.js"></script>
+	<script src="{{ domain }}public/js/vue.min.js"></script>
+	<script type="text/javascript" src="https://vk.com/js/api/openapi.js?162"></script>
+
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<style>
+		.template {
+			display : none;
+		}
+		a {
+			cursor : pointer;
+		}
+
+		#chats .item:last-child : {
+			margin-bottom : 20px;
+		}
+	</style>
+<div id="jackpot-undefined-timer" style="display:none;"></div>
+</head>
+<body class="right">
+<div class="loaderFull">
+	<div id="loader"><img src="{{ domain }}public/images/loader.png" alt=""></div>
+</div>
+<div class="loaderArea">
+  <div id="loader"><img src="{{ domain }}public/images/loader.png" alt=""></div>
+</div>	
+<div class="page" style="display:none;">
+	<div class="limiter" v-if="!login.isAuth">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-form-title" style="background-image: url({{ domain }}public/images/bg-01.jpg); max-height: 130px; height: 130px;">
+					<img src="{{ domain }}public/images/ebabkus.png" style="height: 70px;">
+				</div>
+				<div class="login-form">
+					<ul class="form-selector">
+						<li class="form active" id="authorize">
+							<a>
+								<div class="form-name">@{{ lang[ln].auth.auth }}</div>
+							</a>
+						</li>
+						<li class="form" id="register">
+							<a>
+								<div class="form-name">@{{ lang[ln].auth.reg }}</div>
+							</a>
+						</li>
+					</ul>
+					<div class="form-table active" id="authorize_form">
+						<div class="auth-form">
+							<div class="form-group">
+								<label for=""><i class="fas fa-user"></i></label>
+								<input type="text" v-bind:placeholder="lang[ln].auth.login" id="login">
+							</div>
+							<div class="form-group">
+								<label for=""><i class="fas fa-key"></i></label>
+								<input type="password" v-bind:placeholder="lang[ln].auth.password" id="password">
+							</div>
+                            <center style="margin-bottom : 10px;" class="captcha"></center>
+							<a class="auth-btn" v-on:click="authorize" v-if="!login.authorize">@{{ lang[ln].auth.authbtn }}</a>
+							<a class="auth-btn" v-if="login.authorize" style="opacity : 0.5;">@{{ lang[ln].auth.wait }}</a>
+						</div>
+					</div>
+					<div class="form-table" id="register_form">
+						<div class="auth-form">
+							<div class="form-group">
+								<label for=""><i class="fas fa-user"></i></label>
+								<input type="text" v-bind:placeholder="lang[ln].auth.login" id="reg_username">
+							</div>
+							<div class="form-group">
+								<label for=""><i class="fas fa-key"></i></label>
+								<input type="password" v-bind:placeholder="lang[ln].auth.password" id="reg_passwd">
+							</div>
+							<div class="form-group">
+								<label for=""><i class="fas fa-key"></i></label>
+								<input type="password" v-bind:placeholder="lang[ln].auth.password2" id="reg_passwd_confirm">
+							</div>
+                            <center style="margin-bottom : 10px;" class="captcha"></center>
+							<a class="auth-btn" v-if="!login.registration" v-on:click="register">@{{ lang[ln].auth.regbtn }}</a>
+							<a class="auth-btn" v-if="login.registration">@{{ lang[ln].auth.wait }}</a>
+						</div>
+					</div>
+					<div class="auth-with">
+						<div class="auth-title"><span class="text">@{{ lang[ln].auth.t }}</span></div>
+						<div class="auth-btns">
+							<a href="#" v-on:click="auth('vkontakte')"><i class="fab fa-vk"></i></a>
+                            <a href="#" v-on:click="auth('steam')"><i class="fab fa-steam"></i></a>
+							<a href="#" v-on:click="auth('facebook')"><i class="fab fa-facebook-f"></i></a>
+							<!--  <a href="#"><i class="fab fa-odnoklassniki"></i></a>  -->
+							<a href="#" v-on:click="auth('google')"><i class="fab fa-google"></i></a>
+						</div>
+					</div>
+					<div class="terms">@{{ (ln == 'ru') ? 'Авторизуясь вы потдверждаете,что вам есть 18 лет и принимаете условия' : 'By logging in, you confirm that you are 18 years old and accept the terms of the' }} <a rel="popup" v-on:click="showModal('terms_login')" style="color: #4348887d;"> @{{ (ln == 'ru') ? 'пользовательского соглашения' : 'user agreement.' }}</a></div>
+					<div class="info" v-html="lang[ln].auth.d2"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="leftbar" v-bind:class="{active : nav}" v-if="login.isAuth">
+		<a v-on:click="showTemplate('crash', true)" class="logo"></a>
+		<a class="close-leftbar" v-on:click="navResize(false)"></a>
+		<div class="container">
+			<div class="scroll">
+				<ul class="nav">
+					<li><a class="" v-on:click="showTemplate('jackpot', true)"><div class="ico ico-nav2"></div><span>@{{ lang[ln].leftbar.jackpot }}</span><b class="new">NEW</b></a></li>
+					<li><a class="" v-on:click="showTemplate('crash',true)"><div class="ico ico-nav5"></div><span>@{{ lang[ln].leftbar.crash }}</span><b class="new">NEW</b></a></li>
+					<!--<li><a href="/coinflip" class=""><div class="ico ico-nav3"></div><span>Coinflip Game</span></a></li>-->
+					<li><a class="" v-on:click="showTemplate('dice', true)"><div class="ico ico-nav4"></div><span>@{{ lang[ln].leftbar.dice }}</span></a></li>
+
+				</ul>
+				<div class="sep"></div>
+				<ul class="subnav" v-if="login.isAuth">
+					<li><a rel="popup" v-on:click="showTemplate('vgo')"><div class="ico ico-subnav1"></div><span>@{{ lang[ln].leftbar.deposit }}</span><!--<b class="new" style="color : #73e57a"> +10%</b>--></a></li>
+<!--					<li><a rel="popup"  v-on:click="showTemplate('vgo', true)"><div class="ico ico-subnav1"></div><span>@{{ lang[ln].leftbar.vgo }}</span></a></li>-->
+					<li><a rel="popup"  v-on:click="showTemplate('skins', true)"><div class="ico ico-subnav2"></div><span>@{{ lang[ln].leftbar.withdraw }}</span></a></li>
+<!--					<li><a rel="popup"  v-on:click="showTemplate('skins', true)"><div class="ico ico-subnav2"></div><span>@{{ lang[ln].leftbar.shop }}</span></a></li>-->
+					<li><a rel="popup" v-on:click="showModal('exchange')"><div class="ico ico-subnav3"></div><span>@{{ lang[ln].leftbar.send }}</span></a></li>
+					<li><a class="" v-on:click="showTemplate('pay/history', true)"><div class="ico ico-subnav11"></div><span>@{{ lang[ln].leftbar.pay_history }}</span><b class="new" style="color : #73e57a" v-if="activeTrades > 0">(@{{ activeTrades }})</b></a></li>
+					<li><a class="" v-on:click="showTemplate('ref', true)"><div class="ico ico-subnav4"></div><span>@{{ lang[ln].leftbar.ref }}</span></a></li>
+					<li><a v-on:click="logout"><div class="ico ico-subnav5"></div><span>@{{ lang[ln].leftbar.logout }}</span></a></li>
+				</ul>
+				<div class="sep" v-if="login.isAuth"></div>
+				<ul class="subnav">
+					<li><a class="" v-on:click="showTemplate('fair')"><div class="ico ico-subnav12"></div><span>@{{ lang[ln].leftbar.fair }}</span></a></li>
+					<li><a class="" v-on:click="showTemplate('youtube')"><div class="ico ico-subnav6"></div><span>@{{ lang[ln].leftbar.youtube }}</span></a></li>
+					<li><a class="" v-on:click="showTemplate('bonus')"><div class="ico ico-subnav7"></div><span>@{{ lang[ln].leftbar.bonus }}</span></a></li>
+					<li><a class="" v-on:click="showTemplate('faq')"><div class="ico ico-subnav8"></div><span>@{{ lang[ln].leftbar.faq }}</span></a></li>
+					<li><a class="" v-on:click="showTemplate('support')"><div class="ico ico-subnav13"></div><span>@{{ lang[ln].leftbar.support }}</span></a></li>
+					<li><a class="" v-on:click="showTemplate('terms')"><div class="ico ico-subnav9"></div><span>@{{ lang[ln].leftbar.terms }}</span></a></li>
+					{{--  <li><a href="/admin" v-on:click="linkTarget"><div class="ico ico-subnav10"></div><span>Панель управления</span></a></li>  --}}
+				</ul>			
+			</div>		
+		</div>
+		<!--<a class="action-leftbar"><div class="arrow"></div><span>Свернуть</span></a>-->
+	</div>
+		
+	<div class="topbar" v-if="login.isAuth">
+		<a class="nav-resize" v-on:click="navResize(true)"></a>
+		<ul class="languagepicker" v-if="ln == 'ru'">
+			<a v-on:click="switchLang('ru')"><li><img src="{{ domain }}public/images/ru.png"/><span>Русский</span></li></a>
+			<a v-on:click="switchLang('en')"><li><img src="{{ domain }}public/images/en.png"/><span>Английский</span></li></a>
+		</ul>
+		<ul class="languagepicker" v-if="ln == 'en'">
+				<a v-on:click="switchLang('en')"><li><img src="{{ domain }}public/images/en.png"/><span>English</span></li></a>
+			<a v-on:click="switchLang('ru')"><li><img src="{{ domain }}public/images/ru.png"/><span>Russian</span></li></a>
+		</ul>
+		<div class="theme">
+			<div class="toggleWrapper">
+				<input type="checkbox" class="dn" id="dn" v-on:change="changeTheme"/>
+				<label for="dn" class="toggle">
+					<span class="toggle__handler">
+						<span class="crater crater--1"></span>
+						<span class="crater crater--2"></span>
+						<span class="crater crater--3"></span>
+					</span>
+					<span class="star star--1"></span>
+					<span class="star star--2"></span>
+					<span class="star star--3"></span>
+					<span class="star star--4"></span>
+					<span class="star star--5"></span>
+					<span class="star star--6"></span>
+				</label>
+			</div>
+		</div>
+		<div class="online"><div class="ico-user"></div><span class="text">@{{ lang[ln].topbar.online }}</span> <span class="on">@{{ online }}</span></div>
+		<a v-bind:href="vkgroup" class="btn" target="_blank">@{{ lang[ln].topbar.vk }}</a>
+		<div class="mini-profile" v-if="login.isAuth">
+			<div class="avatar"><img v-bind:src="login.user.avatar" alt=""></div>
+		<div class="name">@{{ login.user.username }}</div>
+			<div class="balance">
+				<div class="sum tooltip"> 
+					<span id="money2">@{{ money(login.user.balance, 2) + ((ln == 'ru') ? ' RUB' : ' USD') }}</span>
+				</div>
+				<a rel="popup" v-on:click="showModal('deposit')">@{{ lang[ln].topbar.deposit }}</a>
+			</div>
+		</div>	
+		<div class="login" v-else><a data-method="vkontakte" class="btn-vk-mobile auth" v-on:click="auth('vkontakte')">@{{ lang[ln].viavk }}<div class="ico ico-vk"></div></a></div>
+	</div>
+
+	<div class="content" v-if="login.isAuth">
+		<div class="main-width" id="app">
+			<center v-if="alert">
+				<div class="alert alert-red">
+					<span class="alert-close" data-close="alert" v-bind:title="(ln == 'en') ? 'Close' : 'Закрыть'" v-on:click="alert = false;">&times;</span>
+					<center v-html="alert[ln]"></center>
+				</div>
+			</center>
+			<div v-if="href == 'vgo'">
+				<div class="title"><span>@{{ lang[ln].vgo.title }}</span></div>
+				<ul class="market-type">
+					<li class="type active"><img src="{{ domain }}public/images/market_vgo.png" alt=""></li>
+					<li class="type" v-on:click="showModal('deposit');"><img src="{{ domain }}public/images/money_icon_dark.png" alt="" v-on:click="showModal('deposit');"></li>
+				</ul>
+				<div class="vgo-item" v-if="!vgo.parsed" style="margin-top: 15px;">
+					<div class="desc">
+						<div id="fixHeight" class="label" style="">@{{ lang[ln].vgo.label }}</div>
+						<input type="text" placeholder="7656119xxxxxxxxxx" class="input" id="vgoSteamId64">
+						<a class="btn" v-if="!vgo.parsing" v-on:click="parseInventory">@{{ lang[ln].vgo.btn1 }}</a>
+						<a class="btn" v-if="vgo.parsing" style="opacity : 0.5;">@{{ lang[ln].vgo.btn2 }}</a>
+					</div>
+				</div>
+				<div class="market-filters" v-if="vgo.parsed">
+					<div class="left">
+						<div class="search">
+							<input type="text" v-on:input="setItemsSearch" class="search-input itemsSearch" v-bind:placeholder="lang[ln].skins.search" v-bind:value="vgo.search"/>
+							<i class="fas fa-search"></i>
+						</div>
+					</div>
+					<div class="right">
+						<ul class="price-filter" v-if="vgo.sort == 'desc'">
+							<li>@{{ lang[ln].skins.hl }}</li>
+							<li v-on:click="sortItems('asc')">@{{ lang[ln].skins.lh }}</li>
+						</ul>
+						<ul class="price-filter" v-if="vgo.sort == 'asc'">
+							<li>@{{ lang[ln].skins.lh }}</li>
+							<li v-on:click="sortItems('desc')">@{{ lang[ln].skins.hl }}</li>
+						</ul>
+						<ul class="price-cat">
+							<li>@{{ skins.schema[vgo.activeSchema][ln].name }}</li>
+							<li v-for="(s, index) in skins.schema" v-if="index != vgo.activeSchema" v-on:click="setItemsPrice(index)">@{{ s[ln].name }}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="market" v-if="vgo.parsed">
+					<div class="products">
+						<div class="heading">@{{ lang[ln].skins.list }}</div>
+						<div class="item-list">
+						
+								<div class="item" v-for="(item, index) in vgo.pattern" v-on:click="selectItem(item.classid, item.instanceid, item.key)" v-if="item.active && !item.selected" v-bind:title="'Float : ' + item.float">
+									<div class="item-desc">
+										<span class="item-name">@{{ item.market_hash_name }}</span>
+										<div class="item-image">
+											<img v-bind:src="item.icon_url" alt="vgo">
+										</div>
+										<div class="item-price">@{{ money(item.price, ((ln == 'ru') ? 2 : 3)) }} <div class="ico-balance"></div></div>
+									</div>
+								</div>
+							
+						</div>
+						<a class="btn" style="margin: 20px auto; display : block; width : 200px; text-align : center;" v-on:click="moreItems" v-if="vgo.itemsShowed < vgo.searched">@{{ lang[ln].skins.more }} (@{{ vgo.searched-vgo.itemsShowed }})</a>
+					</div>
+					<div class="basket">
+						<div class="heading">@{{ lang[ln].skins.total }}: <span>@{{ money(parseFloat(vgo.total.toFixed(2)), ((ln == 'ru') ? 2 : 3)) }} <div class="ico-balance"></div></span></div>
+						<a class="btn" v-on:click="buyItems" v-if="!vgo.disableButton">@{{ lang[ln].vgo.btn3 }}</a>
+						<a class="btn" v-if="vgo.disableButton" style="opacity : 0.5;">@{{ lang[ln].vgo.btn2 }}</a>
+						<div class="basket-list">
+							<div class="item" v-for="(item, index) in vgo.selected" v-on:click="removeItem(index)" v-if="item.keys.length > 0" v-bind:title="'Float : ' + item.float">
+								<div class="item-desc">
+									<span class="item-name" v-if="item.keys.length == 1">@{{ item.market_hash_name }}</span>
+									<span class="item-name" v-if="item.keys.length > 1">@{{ item.market_hash_name }} (x@{{ item.keys.length }})</span>
+									<div class="item-image">
+											<img v-bind:src="item.icon_url" alt="item icon">
+									</div>
+									<div class="item-price">@{{ money(item.total_price, ((ln == 'ru') ? 2 : 3)) }} <div class="ico-balance"></div></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div v-if="href == 'skins'">
+				<div class="title"><span>@{{ lang[ln].skins.title }}</span></div>
+				<ul class="market-type">
+					<li class="type" v-bind:class="{active:skins.appid == 'vgo'}"><img src="{{ domain }}public/images/market_vgo.png" alt="" v-on:click="skins.appid = 'vgo'; parseItems(); resetSkins();"></li>
+					<li class="type" v-bind:class="{active:skins.appid == 730}"><img src="{{ domain }}public/images/market_csgo.png" alt="" v-on:click="skins.appid = 730; parseItems(); resetSkins();"></li>
+					<li class="type" v-bind:class="{active:skins.appid == 540}"><img src="{{ domain }}public/images/market_dota.png" alt="" v-on:click="skins.appid = 540; parseItems(); resetSkins();"></li>
+					<li class="type" v-bind:class="{active:skins.appid == 'real'}"><img src="{{ domain }}public/images/cashout-icon.png" alt="" v-on:click="skins.appid = 'real'; parseItems(); resetSkins();"></li>
+					<li class="type"><img src="{{ domain }}public/images/money_icon_dark.png" alt="" v-on:click="showModal('withdraw');"></li>
+				</ul>
+				<div class="market-filters">
+					<div class="left">
+						<div class="search">
+							<input type="text" v-on:input="setItemsSearch" class="search-input itemsSearch" v-bind:placeholder="lang[ln].skins.search" v-bind:value="skins.search"/>
+							<i class="fas fa-search"></i>
+						</div>
+					</div>
+					<div class="right">
+						<ul class="price-filter" v-if="skins.sort == 'desc'">
+							<li>@{{ lang[ln].skins.hl }}</li>
+							<li v-on:click="sortItems('asc')">@{{ lang[ln].skins.lh }}</li>
+						</ul>
+						<ul class="price-filter" v-if="skins.sort == 'asc'">
+							<li>@{{ lang[ln].skins.lh }}</li>
+							<li v-on:click="sortItems('desc')">@{{ lang[ln].skins.hl }}</li>
+						</ul>
+						<ul class="price-cat">
+							<li>@{{ skins.schema[skins.activeSchema][ln].name }}</li>
+							<li v-for="(s, index) in skins.schema" v-if="index != skins.activeSchema" v-on:click="setItemsPrice(index)">@{{ s[ln].name }}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="market">
+					<div class="products">
+						<div class="heading">@{{ lang[ln].skins.list }}</div>
+						<div class="item-list">
+						
+								<div class="item" v-for="(item, index) in skins.pattern" v-on:click="selectItem(item.classid, item.instanceid, item.key)" v-if="item.active && !item.selected && item.appid == skins.appid && item.appid != 'real'" v-bind:title="'Float : ' + item.float">
+									<div class="item-desc">
+										<span class="item-name">@{{ item.market_hash_name }}</span>
+										<div class="item-image">
+											<img v-bind:src="item.icon_url" alt="item icon">
+										</div>
+										<div class="item-price">@{{ money(item.price, ((ln == 'ru') ? 2 : 3)) }} <div class="ico-balance"></div></div>
+									</div>
+								</div>
+
+								<div class="item real" v-for="(item, index) in skins.pattern" v-if="item.appid == 'real' && item.active && !item.selected && item.appid == skins.appid">
+									<div class="item-desc">
+										<span class="item-name">@{{ item.market_hash_name }}</span>
+										<div class="item-image">
+											<img v-bind:src="item.icon_url" alt="item icon">
+										</div>
+										<div class="item-price">@{{ money(item.price, ((ln == 'ru') ? 2 : 3)) }} <div class="ico-balance"></div></div>
+										<ul class="size">
+											<li v-for="s in item.size" v-on:click="selectItem(item.classid, item.instanceid, item.key, s)">@{{ s }}</li>
+										</ul>
+									</div>
+								</div>
+						</div>
+
+						<a class="btn" style="margin: 20px auto; display : block; width : 200px; text-align : center;" v-on:click="moreItems" v-if="skins.itemsShowed < skins.searched">@{{ lang[ln].skins.more }} (@{{ skins.searched-skins.itemsShowed }})</a>
+					</div>
+					<div class="basket">
+						<div class="heading">@{{ lang[ln].skins.total }}: <span>@{{ money(parseFloat(skins.total.toFixed(2)), ((ln == 'ru') ? 2 : 3)) }} <div class="ico-balance"></div></span></div>
+						<a class="btn" v-on:click="buyModal" v-if="!skins.disableButton">@{{ lang[ln].skins.buy }}</a>
+						<a class="btn" v-if="skins.disableButton" style="opacity : 0.5;">@{{ lang[ln].skins.buy2 }}</a>
+						<div class="basket-list">
+							<div class="item" v-for="(item, index) in skins.selected" v-on:click="removeItem(index)" v-if="item.keys.length > 0 && item.appid == skins.appid" v-bind:title="'Float : ' + item.float">
+								<div class="item-desc">
+									<span class="item-name" v-if="item.keys.length == 1">@{{ item.mhn }}</span>
+									<span class="item-name" v-if="item.keys.length > 1">@{{ item.mhn }} (x@{{ item.keys.length }})</span>
+									<div class="item-image">
+											<img v-bind:src="item.icon_url" alt="item icon"/>
+									</div>
+									<div class="item-price">@{{ money(item.total_price, ((ln == 'ru') ? 2 : 3)) }} <div class="ico-balance"></div></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div v-if="href == 'faq'">
+				<div class="title"><div class="ico"><img src="{{ domain }}public/images/ico-faq.svg" width="67" alt=""/></div>FAQ</div>
+				<div class="faq-item">
+					<div class="heading">@{{ lang[ln].faq.q1 }}</div>
+					<div class="desc" v-html="lang[ln].faq.a1"></div>
+				</div>
+				<div class="faq-item">
+					<div class="heading">@{{ lang[ln].faq.q2 }}</div>
+					<div class="desc" v-html="lang[ln].faq.a2"></div>
+				</div>
+				<div class="faq-item">
+					<div class="heading">@{{ lang[ln].faq.q3 }}</div>
+					<div class="desc" v-html="lang[ln].faq.a3"></div>
+				</div>
+
+				<div class="faq-item">
+					<div class="heading">@{{ lang[ln].faq.q4 }}</div>
+					<div class="desc" v-html="lang[ln].faq.a4"></div>
+				</div>
+			</div>
+			<div v-if="href == 'support'">
+				<div class="title"><div class="ico"><img src="{{ domain }}public/images/ico-support.svg" width="67" alt=""/></div>@{{ lang[ln].support.title }}</div>
+				<div class="faq-item">
+					<div class="heading">@{{ lang[ln].support.q1 }}</div>
+					<div class="desc" v-html="lang[ln].support.a1"></div>
+				</div>
+				<div class="faq-item">
+					<div class="heading">@{{ lang[ln].support.q2 }}</div>
+					<div class="desc" v-html="lang[ln].support.a2"></div>
+				</div>
+				<div class="faq-item">
+					<div class="heading">@{{ lang[ln].support.q3 }}</div>
+					<div class="desc" v-html="lang[ln].support.a3"></div>
+				</div>
+				<div class="faq-item">
+					<div class="heading">@{{ lang[ln].support.q4 }}</div>
+					<div class="desc" v-html="lang[ln].support.a4"></div>
+					<div class="desc" v-html="lang[ln].support.a4_1"></div>
+				</div>
+			</div>
+			<div v-if="href == 'pay/history'">
+				<div class="cont-b">
+				<div class="promo">
+				</div>
+				<br>
+					<div class="title" v-if="payHistory.withdraws.length > 0"><span>@{{ lang[ln].phistory.title1 }}</span></div>
+					<div class="payHistory" v-if="payHistory.withdraws.length > 0">
+						<table class="list">
+							<thead>
+								<tr>
+									<th>@{{ lang[ln].phistory.t1.t1 }}</th>
+									<th v-html="lang[ln].phistory.t1.t2"></th>
+									<th>@{{ lang[ln].phistory.t1.t3 }}</th>
+									<th>@{{ lang[ln].phistory.t1.t4 }}</th>
+								</tr>
+							</thead>
+							<tbody>
+
+									<tr v-for="(w, index) in payHistory.withdraws" v-if="w.status == 0">
+											<td><div class="id">@{{ '#' + w.id }}</div></td>
+											<td>
+													<div class="system" v-if="w.method==63">Qiwi</div>
+													<div class="system" v-if="w.method==45">Yandex Money</div>
+													<div class="system" v-if="w.method==1">Web Money WMR</div>
+													<div class="system" v-if="w.method==114">Payeer RUB</div>
+													<div class="system" v-if="w.method==94">Visa/MasterCard RUB</div>
+													<div class="system" v-if="w.method==82">Мегафон</div>
+													<div class="system" v-if="w.method==132">Tele2</div>
+													<div class="system" v-if="w.method==83">Beeline</div>
+													<div class="system" v-if="w.method==83">МТС</div>
+											</td>
+											<!-- dec class - decline -->
+										<td><div class="sum ok">@{{ money(w.amount, 2) }} @{{ (ln == 'ru') ? 'руб' : '' }}</div></td>
+											<td><div class="status">
+												<a class="btn" v-if="!w.canceling" v-on:click="withdraw_decline(index, w.id);">@{{ lang[ln].phistory.btn1 }}</a>
+												<a class="btn" v-if="w.canceling" style="opacity:0.5;">@{{ lang[ln].phistory.btn2 }}</a>
+											</div></td>
+										</tr>
+
+							</tbody>
+						</table>
+					</div>
+
+					<br>
+					<div class="title"><span>@{{ lang[ln].phistory.title2 }}</span></div>
+
+					<div class="payHistory">
+						<table class="list">
+							<thead>
+								<tr>
+									<th>@{{ lang[ln].phistory.t2.t1 }}</th>
+									<th>@{{ lang[ln].phistory.t2.t2 }}</th>
+									<th v-html="lang[ln].phistory.t2.t3"></th>
+									<th>@{{ lang[ln].phistory.t2.t4 }}</th>
+									<th>@{{ lang[ln].phistory.t2.t5 }}</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<tr v-for="deposit in payHistory.deposits" v-if="payHistory.deposits.length > 0">
+									<td><div class="id">@{{ '#' + deposit.id }}</div></td>
+									<td>
+										<div class="type" v-bind:class="{ok:deposit.status==1, dec:deposit.status == 3}" v-if="deposit.info.method == 'promo'">@{{ lang[ln].phistory.types.promo }}</div>
+										<div class="type" v-bind:class="{ok:deposit.status==1, dec:deposit.status == 3}" v-else-if="deposit.info.method == 'bonus'">@{{ lang[ln].phistory.types.bonus }}</div>
+										<div class="type" v-bind:class="{ok:deposit.status==1, dec:deposit.status == 3}" v-else-if="deposit.info.method == 'ref'">@{{ lang[ln].phistory.types.ref2 }}</div>
+										<div class="type" v-bind:class="{ok:deposit.status==1, dec:deposit.status == 3}" v-else-if="deposit.info.method == 'refs'">@{{ lang[ln].phistory.types.ref }}</div>
+										<div class="type" v-bind:class="{ok:deposit.status==1, dec:deposit.status == 3}" v-else-if="deposit.info.method == 63">Qiwi</div>
+										<div class="type" v-bind:class="{ok:deposit.status==1, dec:deposit.status == 3}" v-else-if="deposit.info.method == 45">Yandex Money</div>
+										<div class="type" v-bind:class="{ok:deposit.status==1, dec:deposit.status == 3}" v-else-if="deposit.info.method == 1">Web Money WMR</div>
+										<div class="type" v-bind:class="{ok:deposit.status==1, dec:deposit.status == 3}" v-else-if="deposit.info.method == 114">Payeer RUB</div>
+										<div class="type" v-bind:class="{ok:deposit.status==1, dec:deposit.status == 3}" v-else-if="deposit.info.method == 94">Visa/MasterCard RUB</div>
+										<div class="type" v-bind:class="{ok:deposit.status==1, dec:deposit.status == 3}" v-else-if="deposit.info.method == 82">Мегафон</div>
+										<div class="type" v-bind:class="{ok:deposit.status==1, dec:deposit.status == 3}" v-else-if="deposit.info.method == 132">Tele2</div>
+										<div class="type" v-bind:class="{ok:deposit.status==1, dec:deposit.status == 3}" v-else-if="deposit.info.method == 83">Beeline</div>
+										<div class="type" v-bind:class="{ok:deposit.status==1, dec:deposit.status == 3}" v-else-if="deposit.info.method == 84">МТС</div>
+                                        <div class="type" v-bind:class="{ok:deposit.status==1, dec:deposit.status == 3}" v-else-if="deposit.info.method == 154">Skinpay</div>
+										<div class="type" v-bind:class="{ok:deposit.status==1, dec:deposit.status == 3}" v-else>@{{ lang[ln].phistory.types.another }}</div>
+									</td>
+									<td>
+										<div class="system" v-if="deposit.info.method == 'bonus' || deposit.info.method == 'ref' || deposit.info.method == 'promo' || deposit.info.method == 'refs'">QCash</div>
+										<div class="system" v-else>Free-kassa</div>
+									</td>
+									<td><div class="sum" v-bind:class="{ok:deposit.status==1, dec:deposit.status == 3}">@{{ (deposit.status == 1) ? '+' : '' }}@{{ money(deposit.amount, 2) }}@{{ (ln == 'ru') ? 'руб' : '' }}</div></td>
+									<td>
+										<div class="status" v-if="deposit.status == 0">
+											@{{ lang[ln].phistory.status.wait }}
+										</div>
+										<div class="status ok" v-if="deposit.status == 1">
+											@{{ lang[ln].phistory.status.success }}
+										</div>
+										<div class="status dec" v-if="deposit.status == 3">
+											@{{ lang[ln].phistory.status.decline }}
+										</div>
+									</td>
+								</tr>
+								<center v-if="payHistory.deposits.length == 0"> @{{ lang[ln].phistory.clear }} </center>
+							</tbody>
+						</table>
+					</div>
+
+
+					<br>
+					<div class="title" v-if="payHistory.vgo.length > 0"><span>@{{ lang[ln].phistory.vgo }}</span></div>
+
+					<div class="payHistory" v-if="payHistory.vgo.length > 0">
+						<table class="list">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>@{{ lang[ln].phistory.items }}</th>
+									<th>@{{ lang[ln].phistory.cost }}</th>
+									<th>@{{ lang[ln].phistory.status2 }}</th>
+								</tr>
+							</thead>
+							<tbody>
+
+									<tr v-for="(d, index) in payHistory.vgo" v-if="payHistory.vgo.length > 0">
+											<td><div class="id">@{{ '#' + d.id }}</div></td>
+											<td>
+												<img v-for="item in d.items" v-bind:src="item.icon_url" alt="item image" style="width : 25px; float : left; margin : 0 1px;" v-bind:title="item.market_hash_name + ' - ' + money(item.price, 2) + ((ln == 'ru') ? 'руб.' : ' USD')">
+											</td>
+											<td>
+												@{{ money(d.price, 2) }}
+											</td>
+											<td>
+												<div class="status" v-if="d.status == 1">
+													@{{ lang[ln].phistory.status.wait }}
+												</div>
+												<div class="status ok" v-if="d.status == 4">
+													@{{ lang[ln].phistory.status.sent }}
+												</div>
+												<div class="status ok" v-if="d.status == 5">
+													@{{ lang[ln].phistory.status.success }}
+												</div>
+												<div class="status dec" v-if="d.status == 6">
+													@{{ lang[ln].phistory.status.decline }}
+												</div>
+												<div class="status dec" v-if="d.status == 7">
+													@{{ lang[ln].phistory.status.error }}
+												</div>
+											</td>
+										</tr>
+										<center v-if="payHistory.vgo.length == 0"> @{{ lang[ln].phistory.clear }} </center>
+							</tbody>
+						</table>
+					</div>
+					<br>
+					<div class="title" v-if="payHistory.withdraws.length > 0"><span>@{{ lang[ln].phistory.title3 }}</span></div>
+
+					<div class="payHistory" v-if="payHistory.withdraws.length > 0">
+						<table class="list">
+							<thead>
+								<tr>
+									<th>@{{ lang[ln].phistory.t2.t1 }}</th>
+									<th>@{{ lang[ln].phistory.t2.t2 }}</th>
+									<th v-html="lang[ln].phistory.t2.t3"></th>
+									<th>@{{ lang[ln].phistory.t2.t4 }}</th>
+									<th>@{{ lang[ln].phistory.t2.t5 }}</th>
+								</tr>
+							</thead>
+							<tbody>
+
+									<tr v-for="d in payHistory.withdraws" v-if="payHistory.withdraws.length > 0">
+											<td><div class="id">@{{ '#' + d.id }}</div></td>
+											<td>
+												<div class="type" v-bind:class="{ok:d.status==1, dec:d.status == 2}">@{{ lang[ln].phistory.types.withdraw }}</div>
+											</td>
+											<td>
+												<div class="system" v-if="d.method==63">Qiwi</div>
+												<div class="system" v-if="d.method==45">Yandex Money</div>
+												<div class="system" v-if="d.method==1">Web Money WMR</div>
+												<div class="system" v-if="d.method==114">Payeer RUB</div>
+												<div class="system" v-if="d.method==94">Visa/MasterCard RUB</div>
+												<div class="system" v-if="d.method==82">Мегафон</div>
+												<div class="system" v-if="d.method==132">Tele2</div>
+												<div class="system" v-if="d.method==83">Beeline</div>
+												<div class="system" v-if="d.method==83">МТС</div>
+											</td>
+											<td><div class="sum dec">-@{{ money(d.amount, 2) }}@{{ (ln == 'ru') ? 'руб' : '' }}</div></td>
+											<td>
+												<div class="status" v-if="d.status == 0">
+													@{{ lang[ln].phistory.status.wait }}
+												</div>
+												<div class="status ok" v-if="d.status == 1">
+													@{{ lang[ln].phistory.status.success }}
+												</div>
+												<div class="status dec" v-if="d.status == 2">
+													@{{ lang[ln].phistory.status.decline }}
+												</div>
+											</td>
+										</tr>
+										<center v-if="payHistory.withdraws.length == 0"> @{{ lang[ln].phistory.clear }} </center>
+							</tbody>
+						</table>
+					</div>
+
+					<br>
+					<div class="title" v-if="payHistory.skins.length > 0"><span>Вывод скинами</span></div>
+
+					<div class="payHistory" v-if="payHistory.skins.length > 0">
+						<table class="list">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>@{{ lang[ln].phistory.items }}</th>
+									<th>@{{ lang[ln].phistory.cost }}</th>
+									<th>@{{ lang[ln].phistory.game }}</th>
+									<th>@{{ lang[ln].phistory.status2 }}</th>
+									<th>@{{ lang[ln].phistory.action }}</th>
+								</tr>
+							</thead>
+							<tbody>
+
+									<tr v-for="(d, index) in payHistory.skins" v-if="payHistory.skins.length > 0">
+											<td><div class="id">@{{ '#' + d.id }}</div></td>
+											<td>
+												<img v-for="item in d.items" v-bind:src="item.icon_url" alt="item image" style="width : 25px; float : left; margin : 0 1px;" v-bind:title="((d.appid == 'real') ? item.mhn : item.market_hash_name) + ' - ' + money(item.price, 2) + ((ln == 'ru') ? 'руб.' : ' USD')" style="opacity : @{{ (d.items[i].status == 6) ? '0.5' : '1' }};">
+											</td>
+											<td>
+												@{{ money(d.price, 2) }}
+											</td>
+											<td>@{{ d.game }}</td>
+											<td>
+												<div class="status" v-if="d.status == 1">
+													@{{ lang[ln].phistory.status.check }}
+												</div>
+												<div class="status ok" v-if="d.status == 2">
+													@{{ (d.appid == 'real') ? lang[ln].phistory.status.comp : lang[ln].phistory.status.accept }}
+												</div>
+												<div class="status ok" v-if="d.status == 3">
+													@{{ lang[ln].phistory.status.sending }}
+												</div>
+												<div class="status ok" v-if="d.status == 4">
+													@{{ lang[ln].phistory.status.sent }}
+												</div>
+												<div class="status ok" v-if="d.status == 5">
+													@{{ (d.appid == 'real') ? lang[ln].phistory.status.sent : lang[ln].phistory.status.success }}
+												</div>
+												<div class="status dec" v-if="d.status == 6">
+													@{{ lang[ln].phistory.status.decline }}
+												</div>
+												<div class="status dec" v-if="d.status == 7">
+													@{{ lang[ln].phistory.status.error }}
+												</div>
+											</td>
+											<td>
+												<div class="status" v-if="d.status == 1">
+													<a class="btn" v-if="!d.cancel" v-on:click="cancelSkinsWithdraw(d.id, index)">@{{ lang[ln].phistory.btn1 }}</a>
+													<a class="btn" v-if="d.cancel" style="opacity : 0.5;">@{{ lang[ln].phistory.btn2 }}</a>
+												</div>
+												<div class="status" v-else-if="d.status == 2 && d.appid != 'real'">
+													<a class="btn" v-if="!d.accept" v-on:click="sendItems(d.id, index)">@{{ lang[ln].phistory.got }}</a>
+													<a class="btn" v-if="d.accept" style="opacity : 0.5;">@{{ lang[ln].phistory.got2 }}</a>
+												</div>
+												<div class="status" v-else>-</div>
+											</td>
+										</tr>
+										<center v-if="payHistory.skins.length == 0"> @{{ lang[ln].phistory.clear }} </center>
+							</tbody>
+						</table>
+					</div>
+
+
+
+					<!--<div class="payHistory">
+						<table class="list">
+							<thead>
+								<tr>
+									<th>Дата</th>
+									<th>Тип</th>
+									<th>Система<br>Кошелек</th>
+									<th>Сумма</th>
+									<th>Статус</th>
+								</tr>
+							</thead>
+							<tbody>
+								<center> Пусто </center>
+							</tbody>
+						</table>
+					</div>-->			
+
+				</div>
+			</div>
+			<div v-if="login.isAuth && href == 'ref'">
+				<div class="title"><div class="ico"><img src="{{ domain }}public/images/ico-ref.svg" width="92" style="display: block; margin: -10px auto;" alt=""></div>@{{ lang[ln].ref.title }}</div>
+		
+				<div class="box second verify-vk" v-if="!login.user.verify">
+					<div class="heading">@{{ lang[ln].ref.t1 }}</div>
+					<div class="">
+					
+						<div v-html="lang[ln].ref.d1"></div>
+						<div class="mini-form">
+						<div class="htext" style="width: 178px;margin: 0 auto;"><div id="vk_allow_messages_from_community"></div></div>
+						<br>
+                            <center style="margin-bottom : 10px;" class="captcha" v-if="login.user.method == 'vkontakte'"></center>
+							<a id="error_bonus" class="btn  btn-block btnError" style="color: rgb(45, 44, 75); background : rgb(234, 234, 234);  display: none"></a>
+							<div class="col-lg-4 offset-lg-4" style="margin-top:15px;margin-bottom:18px" v-if="login.user.method == 'vkontakte'">
+								<button class="btn btn-copy" type="submit" value="Проверить" id="enter_but" v-if="!verify.disableButton" v-on:click="verifycation">@{{ lang[ln].ref.cbtn }}</button>
+								<button class="btn btn-copy" type="submit" value="Проверить" id="enter_but" v-if="verify.disableButton" style="opacity:0.5;">@{{ lang[ln].ref.cbtn2 }}</button>
+								
+								
+							</div>
+							<div class="col-lg-4 offset-lg-4" style="margin-top:15px;margin-bottom:18px" v-else>
+								<button class="btn btn-copy" type="submit" v-bind:value="lang[ln].viavk" id="enter_but" v-on:click="auth('vkontakte')">@{{ lang[ln].viavk }}</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="box second" v-if="login.user.verify">
+					<div v-html="lang[ln].ref.d2"></div>
+					<div class="mini-form">
+						<input type="text" class="input" v-bind:value="login.user.ref_code" id="code" readonly>
+						<button class="btn btn-copy" v-on:click="refCopy">@{{ lang[ln].ref.copy }}</button>
+					</div>
+				</div>
+
+				<div class="box second" v-if="login.user.verify">
+					<div class="heading">@{{ lang[ln].ref.t2 }}</div>
+					@{{ lang[ln].ref.d3 }}
+					<div class="mini-form">
+						<input type="text" class="input" id="promoCode" v-bind:placeholder="lang[ln].ref.label">
+						<button class="btn btn-copy" v-on:click="activeRef" v-if="!refs.disableButton">@{{ lang[ln].ref.abtn }}</button>
+						<button class="btn btn-copy"  v-if="refs.disableButton" style="opacity : 0.5;">@{{ lang[ln].ref.abtn2 }}</button>
+					</div>
+				</div>
+
+				<div class="box second" v-if="login.user.verify">
+					<div class="heading">@{{ lang[ln].ref.t3 }}</div>
+
+					<div class="c-grey">
+						@{{ lang[ln].ref.d4t1 }} @{{ref.refs}} @{{ lang[ln].ref.d4t2 }} @{{money(ref.money, 2)}} @{{ lang[ln].ref.d4t3 }}
+					</div>
+
+					<!-- <div class="c-grey">Еще ни кто не ввел Ваш реферальный код.</div> -->
+
+				</div>
+
+				<div class="box second" v-if="login.user.verify">
+					<div class="heading">@{{ lang[ln].ref.t4 }}</div>
+					<div class="ref-system clear">
+						<div class="item" v-bind:class="{active : ref.refs < 10 && !login.user.youtube.active}">
+							<div class="sub-heading">0 @{{ lang[ln].ref.rname }}</div>
+							<div class="num">1</div>
+							<div class="desc">2% @{{ lang[ln].ref.percent }}</div>
+						</div>
+
+						<div class="item" v-bind:class="{active:ref.refs >= 10 && ref.refs < 100 && !login.user.youtube.active}">
+							<div class="sub-heading">10 @{{ lang[ln].ref.rname }}</div>
+							<div class="num">2</div>
+							<div class="desc">4% @{{ lang[ln].ref.percent }}</div>
+						</div>
+
+						<div class="item" v-bind:class="{active : ref.refs >= 100 && ref.refs < 500 && !login.user.youtube.active}">
+							<div class="sub-heading">100 @{{ lang[ln].ref.rname }}</div>
+							<div class="num">3</div>
+							<div class="desc">6% @{{ lang[ln].ref.percent }}</div>
+						</div>
+
+						<div class="item" v-bind:class="{active : ref.refs >= 500 && !login.user.youtube.active}">
+							<div class="sub-heading">500 @{{ lang[ln].ref.rname }}</div>
+							<div class="num">4</div>
+							<div class="desc">8% @{{ lang[ln].ref.percent }}</div>
+						</div>
+
+						<div class="item" v-bind:class="{active : login.user.youtube.active}">
+							<div class="sub-heading">YouTube</div>
+							<div class="ico"><i class="fab fa-youtube"></i></div>
+							<div class="desc">10% @{{ lang[ln].ref.percent }}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div v-if="href == 'jackpot/history'">
+				<div class="title"><span>@{{ lang[ln].jackpot_history.title }}</span></div>
+				<div class="cont-a">
+					<table class="historyTable">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>@{{ lang[ln].jackpot_history.winner }}</th>
+									<th>@{{ lang[ln].jackpot_history.won }}</th>
+									<th>@{{ lang[ln].jackpot_history.ticket }}</th>
+									<th>@{{ lang[ln].jackpot_history.chance }}</th>
+									<th>@{{ lang[ln].jackpot_history.action }}</th>
+								</tr>
+							</thead>
+				
+							<tr v-for="game in jackpotHistory.games">
+								<td><div class="game">@{{ game.id }}</div></td>
+								<td><div class="user">
+									<div class="avatar"><img v-bind:src="game.winner.user.avatar" alt=""></div>
+									<div class="username">@{{ game.winner.user.username }}</div>
+								</div></td>
+								<td><div class="win"><span>@{{ money(game.price, 2) }} <div class="ico-balance"></div></span></div></td>
+								<td><div class="ticket"><span><i class="fas fa-ticket-alt"></i> @{{ game.winner_ticket }}</span></div></td>
+								<td><div class="chance"><span>@{{ game.winner_chance }}%</span></div></td>
+								<td><div class="show"><a class="btn" v-on:click="reactiveFair(game.hash)">@{{ lang[ln].jackpot_history.fair }}</a></div></td>
+							</tr>
+				
+					</table>
+				</div>
+			</div>
+			<div v-if="href == 'youtube'">
+				<div class="title"><div class="ico"><img src="{{ domain }}public/images/ico-youtube.svg" width="90" alt=""></div>@{{ lang[ln].youtube.title }}</div>
+				<br>
+				<div class="yotube-desc">
+					<div class="heading" v-html="lang[ln].youtube.t1"></div>
+					@{{ lang[ln].youtube.tdesc }}
+				</div>
+
+				<div class="box">
+					<div class="heading">@{{ lang[ln].youtube.b1title }}</div>
+					<div class="youtube-list clear">
+						<div class="item">
+							<div class="image"><img src="{{ domain }}public/images/ico-youtube3.png" alt=""></div>
+							<div class="desc" v-html="lang[ln].youtube.b1t1"></div>
+						</div>
+						<div class="item">
+							<div class="image"><img src="{{ domain }}public/images/ico-youtube4.png" alt=""></div>
+							<div class="desc" v-html="lang[ln].youtube.b1t2"></div>
+						</div>
+						<div class="item">
+							<div class="image"><img src="{{ domain }}public/images/ico-youtube6.png" alt=""></div>
+							<div class="desc" v-html="lang[ln].youtube.b1t3"></div>
+						</div>
+						<div class="item">
+							<div class="image"><img src="{{ domain }}public/images/ico-youtube7.png" alt=""></div>
+							<div class="desc" v-html="lang[ln].youtube.b1t4"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="youtube-rules">
+					<div class="heading">@{{ lang[ln].youtube.need }}</div>
+					<a v-bind:href="vksend" class="btn" target="_blank">@{{ lang[ln].youtube.send }}</a>
+				</div>
+
+				<div class="box">
+					<div class="heading">@{{ lang[ln].youtube.ny }}</div>
+					<div class="youtube-list clear">
+						<div class="item">
+							<div class="image"><img src="{{ domain }}public/images/ico-youtube8.png" alt=""></div>
+							<div class="desc" v-html="lang[ln].youtube.b2t1"></div>
+						</div>
+						<div class="item">
+							<div class="image"><img src="{{ domain }}public/images/ico-youtube9.png" alt=""></div>
+							<div class="desc" v-html="lang[ln].youtube.b2t2"></div>
+						</div>
+						<div class="item">
+							<div class="image"><img src="{{ domain }}public/images/ico-youtube10.png" alt=""></div>
+							<div class="desc" v-html="lang[ln].youtube.b2t3"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div v-if="href == 'terms'">
+				<div class="title"><div class="ico"><img src="{{ domain }}public/images/ico-terms.svg" width="67" alt=""></div>@{{ lang[ln].terms.title }}</div>
+				<div class="terms-item">
+					<div class="heading">@{{ lang[ln].terms.t1 }}</div>
+					<ol class="decimal-list" v-html="lang[ln].terms.b1"></ol>
+				</div>
+				<div class="terms-item">
+					<div class="heading">@{{ lang[ln].terms.t2 }}</div>
+					<ol class="decimal-list" v-html="lang[ln].terms.b2"></ol>
+				</div>
+				<div class="terms-item">
+					<div class="heading">@{{ lang[ln].terms.t3 }}</div>
+					<ol class="decimal-list" v-html="lang[ln].terms.b3"></ol>
+				</div>
+				<div class="terms-item">
+					<div class="heading">@{{ lang[ln].terms.t4 }}</div>
+					<ol class="decimal-list" v-html="lang[ln].terms.b4"></ol>
+				</div>
+				<div class="terms-item">
+					<div class="heading">@{{ lang[ln].terms.t5 }}</div>
+					<ol class="decimal-list" v-html="lang[ln].terms.b5"></ol>
+				</div>
+				<div class="terms-item">
+					<div class="heading">@{{ lang[ln].terms.t6 }}</div>
+					<ol class="decimal-list" v-html="lang[ln].terms.b6"></ol>
+				</div>
+				<div class="terms-item">
+					<div class="heading">@{{ lang[ln].terms.t7 }}</div>
+					<ol class="decimal-list" v-html="lang[ln].terms.b7"></ol>
+				</div>
+				<div class="terms-item">
+					<div class="heading">@{{ lang[ln].terms.t8 }}</div>
+					<ol class="decimal-list" v-html="lang[ln].terms.b8"></ol>
+				</div>
+			</div>
+			<div v-if="href == 'fair'">
+				<div class="title"><div class="ico"><img src="{{ domain }}public/images/ico-fair.svg" width="67" alt=""></div>@{{ lang[ln].fair.title }}</div>
+				<div class="faq-item">
+					<div class="heading">@{{ lang[ln].fair.text }}</div>
+					<div class="desc">@{{ lang[ln].fair.text2 }}</div>
+				</div>
+				<div class="faq-item">
+					<div class="desc fair">
+						<div class="label" id="fixHeight">@{{ lang[ln].fair.hash }}</div>
+						<input type="text" class="input" v-on:input="fair_hash_edit" id="fair_hash" placeholder="хххххххххххххххх" v-bind:value="fair.hash">
+						<a class="btn" v-on:click="checkFair" v-if="!fair_result.disableButton">@{{ lang[ln].fair.fair }}</a>
+						<a class="btn" v-else style="opacity:0.5;">@{{ lang[ln].fair.fair_wait }}</a>
+						<div class="col" v-if="fair_result.checked">
+							<div class="label">@{{ lang[ln].fair.resultnumber }}</div>
+							<input type="text" class="input" id="round"  v-bind:value="fair_result.id" disabled>
+						</div>
+						<div class="col" v-if="fair_result.checked">
+							<div class="label">@{{ lang[ln].fair.resultvalue }}</div>
+							<input type="text" class="input" id="number" v-bind:value="fair_result.number" disabled>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div v-if="href == 'bonus'">
+				<div class="title"><div class="ico"><img src="{{ domain }}public/images/ico-gift.svg" width="67" alt=""></div>@{{ lang[ln].bonus.title }}</div>
+				<div class="bonus">
+					<div class="heading">@{{ lang[ln].bonus.desc }}</div>
+					<span class="desc">@{{ lang[ln].bonus.desc2 }}</span>
+					<div class="desc" style="font-weight: 600;" v-html="lang[ln].bonus.p1"></div>
+					<script type="text/javascript" src="https://vk.com/js/api/openapi.js?162"></script>
+					<div class="bonuswidg" style="width: 178px;margin: 0 auto;"><div id="vk_allow_messages_from_community1"></div></div>
+					<script type="text/javascript">
+VK.Widgets.AllowMessagesFromCommunity("vk_allow_messages_from_community1", {height: 22}, 183289269);
+</script>
+					<!--<center>
+						<div class="line">
+						<div class="cooldown" style="">
+							<div class="text">Бонус выдан</div>
+						</div>
+						<ul class="carousel" id="bonus_carousel">
+								<li>
+									<div class="sum">1</div>
+									<div class="background" style="background: red"></div>
+									<div class="bottom" style="background: red">монет</div>
+								</li>
+						</ul>
+						<div class="picker"></div>
+					</div>
+					</center>-->
+					<div class="exp">
+						<div class="container">
+							<div class="sub-heading">@{{ lang[ln].lvl.t1 }}</div>
+							<div class="sub-desc">@{{ Math.floor(login.user.lvl) }} @{{ lang[ln].lvl.t2 }}</div>
+							<div class="load"><div class="line" v-bind:style="'width:' +((login.user.lvl-(Math.floor(login.user.lvl/1)*1))/1)*100 +'%;'"></div></div>
+						</div>
+					</div>
+					<div class="action">
+                        <center style="margin-bottom : 10px;" class="captcha"></center>
+						<a class="btn getBonus" v-if="login.isAuth && login.user.method == 'vkontakte' && !bonus.disableButton" v-on:click="getBonus">@{{ lang[ln].bonus.check }} @{{ money(Math.floor(login.user.lvl), 2) }} @{{ (ln == 'ru') ? 'РУБ.' : 'USD' }}</a>
+						<a class="btn getBonus" v-if="login.isAuth && login.user.method == 'vkontakte' && bonus.disableButton" v-on:click="getBonus" style="opacity : 0.5;">@{{ lang[ln].bonus.check_wait }}</a>
+						<a class="btn getBonus" v-if="login.isAuth && login.user.method != 'vkontakte'" v-on:click="auth('vkontakte')">@{{ lang[ln].viavk }}</a>
+						<br>
+					</div>
+				</div>
+			</div>
+			<div v-if="href == 'crash'">
+				<div class="crash">
+					<div class="chart-block">
+						<div class="divcrash" v-bind:class="{crashd : crash.crashed}">
+							<div class="linescrash">
+								<div class="linecrash l1" data-t="0.7019230769230769"></div>
+								<div class="linecrash l2" data-t="0.4807692307692308"></div>
+								<div class="linecrash l3" data-t="0.25"></div>
+							</div>
+							<div class="crashcont">
+								<div data-w="0.0359722" data-h="0.016025795119824868" data-l="0" data-r="0" class="p1" data-t="0.9038548447581226">
+									<div class="point" v-bind:class="{
+										po : (crash.multiplier > 0), 
+										pto : (crash.multiplier > 0), 
+										pon : (crash.multiplier > 1.1)
+									}"></div>
+								</div>
+								<div data-w="0.0359722" data-h="0.016025795119824868" data-l="0.072" data-r="-2" class="p2" data-t="0.9038548447581226">
+									<div class="point" v-bind:class="{
+										po : (crash.multiplier > 1), 
+										pto : (crash.multiplier > 1.1), 
+										pon : (crash.multiplier > 1.2)
+									}"></div>
+								</div>
+								<div data-w="0.0359722" data-h="0.016025795119824868" data-l="0.146" data-r="-5" class="p3" data-t="0.8974445267101927">
+									<div class="point" v-bind:class="{
+										po : (crash.multiplier > 1.1), 
+										pto : (crash.multiplier > 1.2), 
+										pon : (crash.multiplier > 1.3)
+									}"></div>
+								</div>
+								<div data-w="0.0359722" data-h="0.016025795119824868" data-l="0.216" data-r="-8" class="p4" data-t="0.8878290496382978">
+									<div class="point" v-bind:class="{
+										po : (crash.multiplier > 1.2), 
+										pto : (crash.multiplier > 1.3), 
+										pon : (crash.multiplier > 1.4)
+									}"></div>
+								</div>
+								<div data-w="0.0359722" data-h="0.016025795119824868" data-l="0.284" data-r="-9" class="p5" data-t="0.8718032545184728">
+									<div class="point" v-bind:class="{
+										po : (crash.multiplier > 1.3), 
+										pto : (crash.multiplier > 1.4), 
+										pon : (crash.multiplier > 1.5)
+									}"></div>
+								</div>
+								<div data-w="0.0359722" data-h="0.016025795119824868" data-l="0.35" data-r="-13" class="p6" data-t="0.852572300374683">
+									<div class="point" v-bind:class="{
+										po : (crash.multiplier > 1.4), 
+										pto : (crash.multiplier > 1.5), 
+										pon : (crash.multiplier > 1.65)
+									}"></div>
+								</div>
+								<div data-w="0.0359722" data-h="0.016025795119824868" data-l="0.42" data-r="-17" class="p7" data-t="0.8237258691589983">
+									<div class="point" v-bind:class="{
+										po : (crash.multiplier > 1.5), 
+										pto : (crash.multiplier > 1.65), 
+										pon : (crash.multiplier > 1.80)
+									}"></div>
+								</div>
+								<div data-w="0.0359722" data-h="0.012798392292233578" data-l="0.492" data-r="-23" class="p8" data-t="0.7884691198953836">
+									<div class="point" v-bind:class="{
+										po : (crash.multiplier > 1.65), 
+										pto : (crash.multiplier > 1.80), 
+										pon : (crash.multiplier > 2)
+									}"></div>
+								</div>
+								<div data-w="0.0359722" data-h="0.016025795119824868" data-l="0.56" data-r="-29" class="p9" data-t="0.740391734535909">
+									<div class="point" v-bind:class="{
+										po : (crash.multiplier > 1.80), 
+										pto : (crash.multiplier > 2), 
+										pon : (crash.multiplier > 2.25)
+									}"></div>
+								</div>
+								<div data-w="0.0359722" data-h="0.016025795119824868" data-l="0.626" data-r="-37" class="p10" data-t="0.6794937130805745">
+									<div class="point" v-bind:class="{
+										po : (crash.multiplier > 2), 
+										pto : (crash.multiplier > 2.25), 
+										pon : (crash.multiplier > 2.50)
+									}"></div>
+								</div>
+								<div data-w="0.0359722" data-h="0.016025795119824868" data-l="0.684" data-r="-43" class="p11" data-t="0.602569896505415">
+									<div class="point" v-bind:class="{
+										po : (crash.multiplier > 2.25), 
+										pto : (crash.multiplier > 2.50), 
+										pon : (crash.multiplier > 2.75)
+									}"></div>
+								</div>
+								<div data-w="0.0359722" data-h="0.016025795119824868" data-l="0.736" data-r="-49" class="p12" data-t="0.5192357618823258">
+									<div class="point" v-bind:class="{
+										po : (crash.multiplier > 2.50), 
+										pto : (crash.multiplier > 2.75), 
+										pon : (crash.multiplier > 3)
+									}"></div>
+								</div>
+								<div data-w="0.0359722" data-h="0.016025795119824868" data-l="0.784" data-r="-53" class="p13" data-t="0.4294913092113065">
+									<div class="point" v-bind:class="{
+										po : (crash.multiplier > 2.75), 
+										pto : (crash.multiplier > 3), 
+										pon : (crash.multiplier > 3.5)
+									}"></div>
+								</div>
+								<div data-w="0.0359722" data-h="0.016025795119824868" data-l="0.826" data-r="-57" class="p14" data-t="0.33654169751632224">
+									<div class="point" v-bind:class="{
+										po : (crash.multiplier > 3), 
+										pto : (crash.multiplier > 3.5), 
+										pon : (crash.multiplier > 4)
+									}"></div>
+								</div>
+								<div data-w="0.0359722" data-h="0.016025795119824868" data-l="0.862" data-r="-61" class="p15" data-t="0.246797244845303">
+									<div class="point" v-bind:class="{
+										po : (crash.multiplier > 3.5), 
+										pto : (crash.multiplier > 4), 
+										pon : (crash.multiplier > 5)
+									}"></div>
+								</div>
+								<div data-w="0.0359722" data-h="0.016025795119824868" data-l="0.894" data-r="-64" class="p16" data-t="0.15064247412635376">
+									<div class="point" v-bind:class="{
+										po : (crash.multiplier > 4), 
+										pto : (crash.multiplier > 5), 
+										pon : (crash.multiplier > 6)
+									}"></div>
+								</div>
+								<div data-w="0.0359722" data-h="0.016025795119824868" data-l="0.922" data-r="-71" class="p17" data-t="0.05448770340740455">
+									<div class="point" v-bind:class="{
+										po : (crash.multiplier > 5), 
+										pto : (crash.multiplier > 6), 
+										pon : (crash.multiplier > 7)
+									}"></div>
+								</div>
+
+								<div class="numcrash" v-bind:class="{
+									crashed : crash.crashed, 
+									num10 : (crash.multiplier >= 10 && crash.multiplier < 20),
+									num20 : (crash.multiplier >= 20 && crash.multiplier < 30),
+									num30 : (crash.multiplier >= 30 && crash.multiplier < 40),
+									num40 : (crash.multiplier >= 40 && crash.multiplier < 50),
+									num50 : (crash.multiplier >= 50 && crash.multiplier < 60),
+									num60 : (crash.multiplier >= 60 && crash.multiplier < 70),
+									num70 : (crash.multiplier >= 70 && crash.multiplier < 80),
+									num80 : (crash.multiplier >= 80 && crash.multiplier < 90),
+									num90 : (crash.multiplier >= 90 && crash.multiplier < 100),
+									num100 : (crash.multiplier >= 100)
+								}" upd="1548351276649">@{{ crash.chart }}</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="latest">
+						<span class="koef" v-bind:class="{
+									hl1 : (m.number >= 1 && m.number < 1.5),
+									hl2 : (m.number >= 1.5 && m.number < 3),
+									hl3 : (m.number >= 3 && m.number < 5),
+									hl4 : (m.number >= 5 && m.number < 10),
+									hl5 : (m.number >= 10 && m.number < 30),
+									hl6 : (m.number >= 30)
+								}" v-for="m in crash.history" v-on:click="reactiveFair(m.hash)">x@{{ m.number }}</span>
+					</div>
+					<div class="bet-block">
+						<div class="wrap-but">
+							<div class="top">
+								<div class="title">@{{ lang[ln].crash.autowithdraw }}</div>
+								<input type="text" id="autowithdraw" v-bind:placeholder="lang[ln].crash.autowithdraw_label" class="room-input" value="2.0">
+							</div>
+							<div class="top">
+								<div class="bet">
+									<div class="title">@{{ lang[ln].dice.bet_label }}</div>
+									<input type="text" v-bind:placeholder="lang[ln].crash.bet_placeholder" value="" v-on:keyup.enter="crash_bet" id="stavka_crash">
+									<div class="multipler" v-if="ln == 'ru'">
+										<button type="submit" class="action" v-on:click="crash_buttons(crash.input+1)">+1</button>
+										<button type="submit" class="action" v-on:click="crash_buttons(crash.input+10)">+10</button>
+										<button type="submit" class="action" v-on:click="crash_buttons(crash.input+100)">+100</button>
+										<button type="submit" class="action" v-on:click="crash_buttons(crash.input+1000)">+1000</button>
+										<button type="submit" class="action" v-on:click="crash_buttons(crash.input/2)">1/2</button>
+										<button type="submit" class="action" v-on:click="crash_buttons(crash.input*2)">x2</button>
+										<button type="submit" class="action" v-on:click="crash_buttons('all')">@{{ lang[ln].crash.bet_all }}</button>
+									</div>
+									<div class="multipler" v-if="ln == 'en'">
+										<button type="submit" class="action" v-on:click="crash_buttons(crash.input+(0.5*currency.en))">+0.5</button>
+										<button type="submit" class="action" v-on:click="crash_buttons(crash.input+(1*currency.en))">+1</button>
+										<button type="submit" class="action" v-on:click="crash_buttons(crash.input+(5*currency.en))">+5</button>
+										<button type="submit" class="action" v-on:click="crash_buttons(crash.input+(10*currency.en))">+10</button>
+										<button type="submit" class="action" v-on:click="crash_buttons(crash.input/2)">1/2</button>
+										<button type="submit" class="action" v-on:click="crash_buttons(crash.input*2)">x2</button>
+										<button type="submit" class="action" v-on:click="crash_buttons('all')">@{{ lang[ln].crash.bet_all }}</button>
+									</div>
+								</div>
+							</div>
+							<a class="btn" v-if="!crash.disableButton" v-on:click="crash_bet">@{{ lang[ln].crash.bet_button }}</a>
+							<a class="btn" v-if="crash.disableButton" style="opacity : 0.5;">@{{ lang[ln].crash.bet_button_wait }}</a>
+
+						</div>
+						<!--<div class="noauth">
+							<div class="text">Для участия в игре Вам необходимо авторизоваться на нашем сайте!</div>
+							<a href="/login" class="btn-vk"><div class="ico ico-vk"></div>Авторизация VK</a>
+						</div>-->
+					</div>
+				</div>
+				<div class="mybet" style="opacity: 1;" v-if="login.isAuth && crash.hasBet">
+					<div class="fortoptable">
+						<div class="divtitlemybet">@{{ lang[ln].crash.mybets.sum }}</div>
+						<div class="divtitlemybet">@{{ lang[ln].crash.mybets.autowithdraw }}</div>
+						<div class="divtitlemybet">@{{ lang[ln].crash.mybets.withdraw }}</div>
+					</div>
+					<div class="itemmybet" style="opacity: 1;" v-for="(bet, index) in crash.bets" v-if="login.isAuth && bet.user_id == login.user.id && bet.round_id >= crash.game_id && bet.status == 0">
+						<div class="summybet"><nobr>@{{ money(bet.price, 2) }}<div class="ico-balance"></div></nobr></div>
+						<div class="autoexmybet" v-if="bet.cashout > 0">@{{ bet.cashout.toFixed(2) }}X</div>
+						<div class="autoexmybet" v-if="bet.cashout <= 0">-</div>
+						<div class="exmybet"></div>
+						<div class="butclosemybet" v-if="bet.round_id == crash.game_id && !bet.cashouting && crash.status > 0 && !crash.crashed" v-on:click="crash_cashout(bet.id, index)">@{{ lang[ln].crash.mybets.withdraw_button }}</div>
+						<div class="butclosemybet" v-if="bet.round_id == crash.game_id && !bet.cashouting && crash.status > 0 && crash.crashed" style="opacity : 0.5;">@{{ lang[ln].crash.mybets.withdraw_button }}</div>
+						<div class="butclosemybet" v-if="bet.round_id == crash.game_id && bet.cashouting && !crash.crashed" style="opacity : 0.5;">@{{ lang[ln].crash.mybets.withdraw_button_wait }}</div>
+
+
+
+						<div class="butcancelbet" v-if="(bet.round_id >= crash.game_id) && (crash.status == 0 || bet.round_id > crash.game_id) && !bet.canceling" v-on:click="crash_cancel(bet.id, index)">@{{ lang[ln].crash.mybets.cancel_button }}</div>
+						<div class="butcancelbet" v-if="bet.round_id >= crash.game_id && bet.canceling" style="opacity : 0.5;">@{{ lang[ln].crash.mybets.cancel_button_wait }}</div>
+					</div>
+				</div>
+				<div class="title" v-if="crash.betsCount > 0"><span>@{{ lang[ln].crash.bets.title }}</span></div>
+				<table class="user-bets" v-if="crash.betsCount > 0">
+					<thead>
+						<tr>
+							<th>@{{ lang[ln].crash.bets.user }}</th>
+							<th>@{{ lang[ln].crash.bets.bet }}</th>
+							<th>@{{ lang[ln].crash.bets.win }}</th>
+						</tr>
+					</thead>
+					<tr class="userbet" v-for="bet in crash.bets" v-if="bet.round_id == crash.game_id">
+						<td class="avatar"><img v-bind:src="bet.user.avatar"><div class="username">
+								<a v-bind:href="bet.user.youtube.href" target="_blank" v-if="bet.user.youtube.active">
+										<span class="yt-ico"></span>
+								</a>
+								<span class="vip-ico" v-else-if="bet.user.vip"></span>
+							@{{ bet.user.username }}</div></td>
+						<td class="bet">@{{ money(bet.price, 2) }}<div class="ico-balance"></div></td>
+						<td class="win" v-if="bet.status == 1"><span class="koef">x@{{ bet.cashout }}</span> +@{{ money(bet.won, 2) }}<div class="ico-balance"></div></td>
+						<td class="win" v-else><i class="far fa-clock"></i></td>
+					</tr>
+				</table>
+			</div>
+			<div v-if="href == 'jackpot'">
+				<!--  <div class="stat clear">
+					<div class="item">
+						<div class="heading clear">
+							<div class="left">Максимальный джекпот сегодня</div>
+							<div class="ico"></div>
+						</div>
+						<div class="info">
+							<div class="left" id="maxWinToday">0</div>				
+							<div class="ico ico-clock"></div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="heading clear">
+							<div class="left">Количество игр сегодня</div>
+							<div class="ico"></div>
+						</div>
+						<div class="info">
+							<div class="left" id="gameToday">0</div>				
+							<div class="ico ico-dice"></div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="heading clear">
+							<div class="left">Ставок сегодня</div>
+							<div class="ico"></div>
+						</div>
+						<div class="info">
+							<div class="left" id="betsToday">0</div>				
+							<div class="ico ico-light"></div>
+						</div>
+					</div>
+				</div>  -->
+
+				<!--<div class="history-actions">
+					<a class="btn-border" v-on:click="showTemplate('jackpot/history', true)">@{{ lang[ln].jackpot.history }}</a> 
+					<a class="btn-border" v-on:click="showTemplate('jackpot/myhistory', true)">МОИ ПОБЕДЫ</a> 
+				</div>-->
+
+				<div class="sep-normal"></div>
+
+				<div class="jackpot">
+					<!--<div class="desc">@{{ lang[ln].jackpot.bet_info }}</div>-->
+					<div class="game">
+						<div class="ring">
+							<div class="chart-game">
+								<div class="circle">
+									<canvas id="doughnut" width="400" height="400" class="chartjs-render-monitor" style="/* display: block; */margin-top: -9px;"></canvas>
+									<!-- <canvas id="doughnut" width="400" height="400" style="width: 420px;height: 420px;margin-left: -10px;margin-top: -10px;"></canvas> -->
+								</div>
+								<div class="game-info">
+									<div class="spinner" style=""><img src="{{ domain }}public/images/rotate_arrow.png"></div>
+									<div class="block">
+										<div class="title-block">@{{ lang[ln].jackpot.forgame }}</div>
+										<div class="timer">@{{ jackpot.timer.min }}:@{{ jackpot.timer.sec }}</div>
+
+										<div class="title-block">@{{ lang[ln].jackpot.bank }}</div>
+										<div class="bank">@{{ money(jackpot.game.price, 2) }}<div class="ico-balance"></div></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="user-info">
+						
+							<div class="bet">
+								<input type="text" class="input" v-bind:placeholder="lang[ln].jackpot.bet_placeholder" v-on:keyup.enter="jackpot_bet" id="jackpot_amount">
+								<div class="container clear">
+									<div class="left">@{{ lang[ln].jackpot.balance }} <span id="money">@{{ money(login.user.balance, 2) }}</span><div class="ico-balance"></div></div>
+									<div class="right">
+										<a class="btn makeBet" v-if="!jackpot.disableButton" v-on:click="jackpot_bet">@{{ lang[ln].jackpot.bet_button }}</a>
+										<a class="btn makeBet" v-if="jackpot.disableButton" style="opacity : 0.5;">@{{ lang[ln].jackpot.bet_button_wait }}</a>
+									</div>
+								</div>
+							</div>
+							<div class="title">@{{ lang[ln].jackpot.users }}</div>	
+							<ul class="chances" id="chances">
+
+								<li v-for="user in jackpot.game.users" v-bind:title="user.user.username + ' - ' + user.chance + '%'"> 
+									<img v-bind:src="user.user.avatar" alt="">
+									<span>@{{ parseFloat(parseFloat(user.chance).toFixed(2)) }}%</span>
+									<color v-bind:style="'background : ' + jackpot.colors[user.color] + ';'"></color>
+								</li>
+
+							</ul>
+							<a class="btn-border" v-on:click="showTemplate('jackpot/history', true)">@{{ lang[ln].jackpot.history }}</a>
+						</div>
+									
+					
+					</div>
+					<p class="winner-jackpot" id="winner-box" v-if="jackpot.winner.show">
+							@{{ lang[ln].jackpot.won }}: <span id="winnerName">@{{ jackpot.winner.username }}</span> | @{{ lang[ln].jackpot.wticket }} : <span id="winnerTicket">#@{{ jackpot.winner.ticket }}</span> | @{{ lang[ln].jackpot.winamount }}: <span id="winnerSum">@{{ money(jackpot.game.price, 2) }}</span> <span class="ico-balance"></span>
+					</p>
+					<div class="hash">@{{ lang[ln].jackpot.hash }} <span id="jackpot_hash">@{{ jackpot.game.hash }}</span></div>
+
+
+					<table class="list" id="bets">
+
+						<tr v-for="bet in jackpot.game.bets">
+							<td><div class="avatar"><img v-bind:src="bet.user.avatar" alt=""></div><div class="name">
+									<a v-bind:href="bet.user.youtube.href" target="_blank" v-if="bet.user.youtube.active">
+											<span class="yt-ico"></span>
+									</a>
+									<span class="vip-ico" v-else-if="bet.user.vip"></span>
+								@{{ bet.user.username }}</div></td>
+							<td><span class="c-blue">@{{ lang[ln].jackpot.placed }} @{{ money(bet.amount, 2) }}<div class="ico-balance"></div></span></td>
+							<td>@{{ lang[ln].jackpot.ticket }} #@{{ bet.from }} - @{{ bet.to }}</td>
+							<td><div class="percent">@{{ parseFloat(parseFloat(bet.chance).toFixed(2)) }}%</div></td>
+						</tr>
+
+					</table>			
+				</div>
+			</div>
+			<div v-if="href == 'dice'">
+				<div class="dice">
+					<div class="dice-loop">
+						<div class="left">
+							<div class="balance">
+								<div class="title">@{{ lang[ln].dice.balance }}</div>
+								<div class="val"><span v-if="login.isAuth">@{{ money(login.user.balance, 2) }}</span><div class="ico-balance"></div></div>
+							</div>
+							<div class="bet">
+								<div class="title">@{{ lang[ln].dice.bet_label }}</div>
+								<input type="text" v-bind:placeholder="lang[ln].dice.bet_placeholder" value="" id="stavka_dice" v-on:input="dice_calc" v-on:keyup.enter="dice_play">
+								<div class="multipler" v-if="ln == 'ru'">
+									<button type="submit" class="action" v-on:click="dice_input(dice.bet+1)">+1</button>
+									<button type="submit" class="action" v-on:click="dice_input(dice.bet+10)">+10</button>
+									<button type="submit" class="action" v-on:click="dice_input(dice.bet+100)">+100</button>
+									<button type="submit" class="action" v-on:click="dice_input(dice.bet+1000)">+1000</button>
+									<button type="submit" class="action" v-on:click="dice_input(dice.bet/2)">1/2</button>
+									<button type="submit" class="action" v-on:click="dice_input(dice.bet*2)">x2</button>
+									<button type="submit" class="action" v-on:click="dice_input('all')">@{{ lang[ln].dice.bet_all }}</button>
+								</div>
+
+								<div class="multipler" v-if="ln == 'en'">
+									<button type="submit" class="action" v-on:click="dice_input(dice.bet+(0.5*currency.en))">+0.5</button>
+									<button type="submit" class="action" v-on:click="dice_input(dice.bet+(1*currency.en))">+1</button>
+									<button type="submit" class="action" v-on:click="dice_input(dice.bet+(5*currency.en))">+5</button>
+									<button type="submit" class="action" v-on:click="dice_input(dice.bet+(10*currency.en))">+10</button>
+									<button type="submit" class="action" v-on:click="dice_input(dice.bet/2)">1/2</button>
+									<button type="submit" class="action" v-on:click="dice_input(dice.bet*2)">x2</button>
+									<button type="submit" class="action" v-on:click="dice_input('all')">@{{ lang[ln].dice.bet_all }}</button>
+								</div>
+							</div>
+							<div class="value">
+								<div class="title">@{{ lang[ln].dice.win_label }}</div>
+								<div class="val">
+									<span id="win">@{{ (ln == 'en') ? '$' : '' }}0</span>
+									<div class="ico-balance"></div>
+								</div>
+							</div>
+						</div>
+						<div class="right">
+							<div class="factor">
+								<div class="title">@{{ lang[ln].dice.multiplier_label }}</div>
+								<div class="val"><span id="winner">1.98</span>x</div>
+							</div>
+							<div class="chance">
+								<div class="title">@{{ lang[ln].dice.chance_label }}</div>
+								<div class="val"><span id="one">50.00</span>%</div>
+							</div>
+							<div class="stats">
+								<div class="block">
+									<div class="title">@{{ lang[ln].dice.games_label }}</div>
+									<div class="val"><span id="betsCount">@{{ dice.games }}</span></div>
+								</div>
+								<div class="block">
+									<div class="title">@{{ lang[ln].dice.sum_label }}</div>
+									<div class="val"><span id="betsSum">@{{ money(dice.today_bets, 2) }}</span><div class="ico-balance"></div></div>
+								</div>
+							</div>
+						</div>
+						<center>
+						<div class="wrap_range">
+							<div class="index__home__indicator__inner index__home__indicator__inner--line" style="display: none;">
+								<div class="index__home__indicator__inner__number is-rolling is-hidden " style="transform: translate(-45%, 42px);">
+									<div class="index__home__indicator__inner__number__roll is-negative ">
+										<img alt="" src="{{ domain }}public/images/pointer.svg"><span>0.00</span>
+									</div>
+								</div>
+							</div>
+							<input type="range" v-on:input="dice_calc" id="r1" style="background: -webkit-linear-gradient(left, rgb(241, 2, 96) 0%, rgb(241, 2, 96) 50%, rgb(8, 229, 71) 50%, rgb(8, 229, 71) 100%);" min="2" value="50" max="99" step="0.01" class="range">
+						</div>
+						</center>
+						<div class="wrap">
+							<div class="auto-game-block">
+								<button class="btn" v-on:click="dice_play" v-if="!dice.disableButton && login.isAuth">@{{ lang[ln].dice.bet_button }}</button>
+								<button class="btn" v-else-if="login.isAuth && dice.disableButton" style="opacity:0.55;">@{{ lang[ln].dice.bet_button_wait }}</button>
+							</div>
+						</div>
+						<div class="hash" v-if="login.isAuth">@{{ lang[ln].dice.hash }} <span id="dice_hash">@{{ dice.hash }}</span></div>
+					</div>
+					<br>
+					
+					<div class="title"><span>@{{ lang[ln].dice.last_games }}</span></div>
+					<div class="dice-history">
+						<table>
+							<thead>
+								<tr>
+									<th style="width:20%">@{{ lang[ln].dice.games.user }}</th>
+									<th>@{{ lang[ln].dice.games.bet }}</th>
+									<th>@{{ lang[ln].dice.games.number }}</th>
+									<th>@{{ lang[ln].dice.games.multiplier }}</th>
+									<th>@{{ lang[ln].dice.games.chance }}</th>
+									<th>@{{ lang[ln].dice.games.won }}</th>
+									<th>@{{ lang[ln].dice.games.action }}</th>
+								</tr>
+							</thead>
+							<tbody id="lastGame">
+								<tr class="show" v-for="g in dice.history">
+									<td>
+											<a v-bind:href="g.user.youtube.href" target="_blank" v-if="g.user.youtube.active">
+													<span class="yt-ico"></span>
+											</a>
+											<span class="vip-ico" v-else-if="g.user.vip"></span>
+										@{{ g.user.username }}</td>
+									<td>@{{ money(g.price, 2) }}<div class="ico-balance"></div></td>
+									<td>@{{ g.number.toFixed(2) }}</td>
+									<td>@{{ g.multiplier }}x</td>
+									<td>@{{ parseFloat(g.chance.toFixed(2)) }}%</td>
+									<td v-bind:class="(g.won > 0) ? 'win' : 'lose'">@{{ money(g.won, 2) }}<div class="ico-balance"></div></td>
+									{{--  <td class="lose">1<div class="ico-balance"></div></td>  --}}
+									<td>
+										<a class="btn" v-on:click="reactiveFair(g.hash)" v-if="!chat_open">@{{ lang[ln].dice.games.fair }}</a>
+										<a v-bind:class="{'btn-small' : chat_open, btn : !chat_open}" v-on:click="reactiveFair(g.hash)" v-else><div class="ico ico-subnav12"></div></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			
+		</div>	
+	</div>
+
+	<!--<div class="content">
+		<div class="main-width" id="app">
+		<center>
+			<div class="alert alert-red" >
+				<span class="alert-close" data-close="alert" title="Закрыть">&times;</span>
+				
+				<strong>Внимание!</strong> Если сайт будет недоступен по адресу ebabki.COM , то перейдите на адрес ebabki.com
+				
+			</div>
+			</center>
+			
+		</div>	
+	</div>-->
+
+	<div class="rightbar" v-if="login.isAuth">
+		<div class="chat">
+			<div class="heading action-rightbar">
+				<div class="rightbar-close"><i class="fa fa-angle-down" aria-hidden="true" v-if="!chat_open"></i><i class="fa fa-times" aria-hidden="true" v-if="chat_open"></i></div>
+				<div class="rightbar-title">
+					<div v-bind:class="'chat-left ' + ((chat_active) ? 'active' : 'unactive')" v-on:click="switchChat(true)">
+						@{{ lang[ln].rightbar.chat }}
+					</div>
+					<div v-bind:class="'chat-right ' + ((!chat_active) ? 'active' : 'unactive')" v-on:click="switchChat(false)">
+						<span>@{{ lang[ln].rgiveaway.title }}</span><span class="chat-timer">@{{ giveaway_timer }}</span>
+					</div>
+				</div>
+			</div>
+      <div class="container" v-if="!chat_active">
+				<div class="give-block">
+					<div class="give-title">@{{ lang[ln].rgiveaway.t }}</div>
+					<ul class="give-time">
+						<li><i class="fa fa-clock-o" aria-hidden="true"></i> @{{ giveaway_timer }}</li>
+						<li><i class="fa fa-money" aria-hidden="true"></i> @{{ lang[ln].rgiveaway.money }}</li>
+					</ul>
+					<ul class="give-items" v-html="lang[ln].rgiveaway.ul"></ul>
+					<button class="give-add" v-if="!giveaway_disable" v-on:click="BonusReg">@{{ lang[ln].rgiveaway.btn }}</button>
+					<button class="give-add" v-if="giveaway_disable" style="opacity: 0.5;">@{{ lang[ln].rgiveaway.btn2 }}</button>
+				</div>
+			</div>
+			<div class="container" v-if="chat_active">
+				<div class="giveaway" v-if="giveaway.active">
+					<div class="head">@{{ lang[ln].giveaway.title }}</div>
+					<div class="user">
+						<div class="avatar"><img v-bind:src="giveaway.user.avatar" alt=""></div>
+						<div class="username">@{{ giveaway.user.username }}</div>
+					</div>
+					<div class="det">@{{ lang[ln].giveaway.price }} <span>@{{ money(giveaway.amount, 2) }}</span><div class="ico-balance"></div></div>
+					<div class="info">@{{ lang[ln].giveaway.t1 }} @{{ giveaway.amount }} @{{ lang[ln].giveaway.t2 }}</div>
+				</div>
+				<div class="messages">
+					<div class="scroll" id="chats">
+				
+						<div class="item" id="chatm_1" v-for="m in chat" v-if="m.lang == ln">
+							<div class="sub-heading clear">
+								<div class="left">
+									<div class="avatar">
+										<img v-bind:src="m.user.avatar" alt="">
+									</div>
+									<div class="lvl" v-if="m.user.lvl && m.user.lvl < 10" v-bind:class="{lvl_5 : m.user.lvl >= 5}"><span>@{{ Math.floor(m.user.lvl) || '1' }}</span></div>
+									<div v-bind:class="'lvl lvl_' +  (10*Math.floor(m.user.lvl/10))" v-if="m.user.lvl && m.user.lvl >= 10 && m.user.lvl < 110"><span>@{{ Math.floor(m.user.lvl) }}</span></div>
+									<div class="lvl lvl_100" v-if="m.user.lvl && m.user.lvl >= 110"><span>@{{ Math.floor(m.user.lvl) }}</span></div>
+									<div class="lvl" v-if="!m.user.lvl"><span>1</span></div>
+									<div class="name">
+											<span class="mod-ico" v-if="m.user.is_admin >= 1"></span>
+											<a v-bind:href="m.user.youtube.href" target="_blank" v-else-if="m.user.youtube.active">
+													<span class="yt-ico"></span>
+											</a>
+											<span class="vip-ico" v-else-if="m.user.vip"></span>
+											<span style="color:#ff5722;" v-if="m.user.is_admin == 2">@{{ lang[ln].permissions.admin }}</span> 
+											<span v-if="m.user.is_admin <= 1">@{{ m.user.username }}</span>
+								</div>
+								</div>
+								<div class="date" v-if="m.user.id !== 0">
+									<span>@{{ m.user.id }}</span>
+									<a class="delete" v-on:click="chat_delete(m.id)" v-if="login.user.is_admin > 0">x</a>
+								</div>
+							</div>
+							<div class="text" v-html="m.message" v-if="m.vip_message" v-on:click="buyVip(m.id)"></div>
+							<div class="text" v-if="!m.vip_message && m.user.id !== 0">@{{ m.message }}</div>
+							<div class="text" v-if="m.user.id === 0" style="color: #ce6969;" v-html="m.message"></div>
+						</div>
+
+					</div>
+				</div>
+				<div class="send-form" v-if="login.isAuth">
+					<input type="text" class="input" v-bind:placeholder="lang[ln].rightbar.chat_placeholder" data-own="chat" id="chat_input">
+					<button type="submit" class="btn-send" v-on:click="chat_send"></button>
+					<button type="submit" class="btn-giveaway" v-on:click="giveaway_send"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="overlay" v-on:click="closeModal">
+		<div class="popup" id="deposit" v-if="login.isAuth">
+			<a class="close" rel="close" v-on:click="closeModal"></a>
+			<div class="heading">@{{ lang[ln].deposit.title }}</div>
+			<div class="withdraw">
+				<div class="image"><img src="{{ domain }}public/images/ico-wallet.svg" alt="" width="195"></div>
+				<div class="container">
+					<div class="desc" v-html="lang[ln].deposit.desc">
+							
+					</div>
+					<div class="exp">
+						<div class="container">
+							<div class="sub-heading">@{{ lang[ln].lvl.t1 }}</div>
+							<div class="sub-desc">@{{ Math.floor(this.login.user.lvl) }} @{{ lang[ln].lvl.t2 }}</div>
+							<div class="load"><div class="line" v-bind:style="'width:' +((this.login.user.lvl-(Math.floor(this.login.user.lvl/1)*1))/1)*100 +'%;'"></div></div>
+						</div>
+					</div>
+					<div class="exists">@{{ lang[ln].lvl.toup }} <span id="money3">@{{ money(parseFloat(((Math.floor(login.user.lvl+1)-login.user.lvl)*1000).toFixed(2)) || 0, 2) }}</span><div class="ico-balance"></div></div>
+					<!--<div class="list">
+						<div class="item">Минимальная сумма для вывода - <span id="min_wid">100</span> рублей</div>
+						<div class="item">Сумму для вывода указывайте в монетках! 100 монет - 1 руб.</div>
+						<div class="item">Вывод разрешен только после пополнения на 100 руб!</div>
+					</div>
+					<div class="exists">Доступно для вывода: <span id="money3">0</span><div class="ico-balance"></div></div>-->
+					
+					<div class="sep"></div>
+					<div class="form">
+						<div class="item">
+							<div class="label">@{{ lang[ln].deposit.t1 }}</div>
+							<div class="payments">
+								<a class="subitem" v-bind:class="{active : payment.deposit.method == 63}"><div class="align"><img src="{{ domain }}public/images/ico-qiwi.png" v-on:click="payment.deposit.method=63; dep_calc()" alt=""></div></a>
+								<a class="subitem" v-bind:class="{active : payment.deposit.method == 45}" v-on:click="payment.deposit.method=45; dep_calc()"><div class="align"><img src="{{ domain }}public/images/ico-yandex.png" alt=""></div></a>
+								<a class="subitem" v-bind:class="{active : payment.deposit.method == 1}" v-on:click="payment.deposit.method=1; dep_calc()"><div class="align"><img src="{{ domain }}public/images/ico-webmoney.png" alt=""></div></a>
+								<a class="subitem" v-bind:class="{active : payment.deposit.method == 114}" v-on:click="payment.deposit.method=114; dep_calc()"><div class="align"><img src="{{ domain }}public/images/ico-payeer.png?v1" alt=""></div></a>
+								<a class="subitem" v-bind:class="{active : payment.deposit.method == 94}" v-on:click="payment.deposit.method=94; dep_calc()"><div class="align"><img src="{{ domain }}public/images/ico-visa.png?v1" alt=""></div></a>
+								<a class="subitem" v-bind:class="{active : payment.deposit.method == 82}" v-on:click="payment.deposit.method=82; dep_calc()"><div class="align"><img src="{{ domain }}public/images/ico-megafon.png" alt=""></div></a>
+								<a class="subitem" v-bind:class="{active : payment.deposit.method == 132}" v-on:click="payment.deposit.method=132; dep_calc()"><div class="align"><img src="{{ domain }}public/images/ico-tele2.png" alt=""></div></a>
+								<a class="subitem" v-bind:class="{active : payment.deposit.method == 83}" v-on:click="payment.deposit.method=83; dep_calc()"><div class="align"><img src="{{ domain }}public/images/ico-beeline.png" alt=""></div></a>
+								<a class="subitem" v-bind:class="{active : payment.deposit.method == 84}" v-on:click="payment.deposit.method=84; dep_calc()"><div class="align"><img src="{{ domain }}public/images/ico-mts.png" alt=""></div></a>
+								<a class="subitem" v-bind:class="{active : payment.deposit.method == 116}" v-on:click="payment.deposit.method=116; dep_calc()"><div class="align"><img src="{{ domain }}public/images/ico-bitcoin.png" alt=""></div></a>
+								<a class="subitem" v-bind:class="{active : payment.deposit.method == 'any'}" v-on:click="payment.deposit.method='any'; dep_calc()"><div class="align"><img src="{{ domain }}public/images/other.png" alt=""></div></a>
+                                <a class="subitem" v-bind:class="{active : payment.deposit.method == 154}" v-on:click="payment.deposit.method=154; dep_calc()"><div class="align"><img src="{{ domain }}public/images/ico-skins.png" alt=""></div></a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="label">@{{ lang[ln].deposit.t2 }}</div>
+							<div class="grid clear">
+								<div class="col" style="width : 100%; max-width:100%;">
+									<input type="text" class="input" id="dep_value" v-on:input="dep_calc" v-bind:placeholder="lang[ln].deposit.placeholder">
+									<div class="info">
+										<div class="subitem clear"><div class="left">@{{ lang[ln].deposit.comission }} [@{{ payment.methods[payment.deposit.method].name }}] :</div><div class="left" id="com"> @{{ (payment.methods[payment.deposit.method].comission.deposit*100).toFixed(2) }}%</div></div>
+										<div class="subitem clear"><div class="left"><b>@{{ lang[ln].deposit.finaly }} </b></div><div class="left">
+											<b id="valdepcom">@{{ parseFloat((payment.deposit.amount+parseFloat((payment.deposit.amount*payment.methods[payment.deposit.method].comission.deposit).toFixed(2))).toFixed(2)) }} @{{ (ln == 'ru') ? 'руб.' : 'RUB' }}</b>
+										</div></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--<div class="accept"><label><input type="checkbox" id="checkbox"><span></span>Я подтверждаю правильность введенных данных</label></div>-->
+						
+						<div class="center">
+							<button type="submit" class="btn green" id="depBut" style="opacity:0.5;" v-if="payment.deposit.disableButton">@{{ lang[ln].deposit.btn2 }}</button>
+							<button type="submit" class="btn green" id="depBut" v-if="!payment.deposit.disableButton && ln == 'ru'" v-on:click="dep_send">@{{ lang[ln].deposit.btn }} @{{ money(payment.deposit.amount, 2) }} руб.</button>
+							<button type="submit" class="btn green" id="depBut" v-if="!payment.deposit.disableButton && ln == 'en'" v-on:click="dep_send">@{{ lang[ln].deposit.btn }} @{{ money(payment.deposit.amount, 2) }} USD</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="popup" id="withdraw" v-if="login.isAuth">
+			<a class="close" rel="close" v-on:click="closeModal"></a>
+			<div class="heading">@{{ lang[ln].withdraw.title }}</div>
+			<div class="withdraw">
+				<div class="image"><img src="{{ domain }}public/images/ico-withdraw.svg" alt="" width="195"></div>
+				<div class="container">
+					<div class="desc" v-html="lang[ln].withdraw.desc"></div>
+					<div class="list">
+						<div class="item" v-html="lang[ln].withdraw.d1"></div>
+						<div class="item" v-html="lang[ln].withdraw.d2"></div>
+					</div>
+					<div class="exists">@{{ lang[ln].withdraw.awailable }} <span id="money3">@{{ money(login.user.balance, 2) }}</span><div class="ico-balance"></div></div>
+					
+					<div class="sep"></div>
+					<div class="form">
+						<div class="item">
+							<div class="label">@{{ lang[ln].withdraw.t1 }}</div>
+							<div class="payments">
+									<a class="subitem" v-bind:class="{active : payment.withdraw.method == 63}"><div class="align"><img src="{{ domain }}public/images/ico-qiwi.png" v-on:click="payment.withdraw.method=63; withdraw_calc()" alt=""></div></a>
+									<a class="subitem" v-bind:class="{active : payment.withdraw.method == 45}" v-on:click="payment.withdraw.method=45; withdraw_calc()"><div class="align"><img src="{{ domain }}public/images/ico-yandex.png" alt=""></div></a>
+									<a class="subitem" v-bind:class="{active : payment.withdraw.method == 1}" v-on:click="payment.withdraw.method=1; withdraw_calc()"><div class="align"><img src="{{ domain }}public/images/ico-webmoney.png" alt=""></div></a>
+									<a class="subitem" v-bind:class="{active : payment.withdraw.method == 114}" v-on:click="payment.withdraw.method=114; withdraw_calc()"><div class="align"><img src="{{ domain }}public/images/ico-payeer.png?v1" alt=""></div></a>
+									<a class="subitem" v-bind:class="{active : payment.withdraw.method == 94}" v-on:click="payment.withdraw.method=94; withdraw_calc()"><div class="align"><img src="{{ domain }}public/images/ico-visa.png?v1" alt=""></div></a>
+									<a class="subitem" v-bind:class="{active : payment.withdraw.method == 82}" v-on:click="payment.withdraw.method=82; withdraw_calc()"><div class="align"><img src="{{ domain }}public/images/ico-megafon.png" alt=""></div></a>
+									<a class="subitem" v-bind:class="{active : payment.withdraw.method == 132}" v-on:click="payment.withdraw.method=132; withdraw_calc()"><div class="align"><img src="{{ domain }}public/images/ico-tele2.png" alt=""></div></a>
+									<a class="subitem" v-bind:class="{active : payment.withdraw.method == 83}" v-on:click="payment.withdraw.method=83; withdraw_calc()"><div class="align"><img src="{{ domain }}public/images/ico-beeline.png" alt=""></div></a>
+									<a class="subitem" v-bind:class="{active : payment.withdraw.method == 84}" v-on:click="payment.withdraw.method=84; withdraw_calc()"><div class="align"><img src="{{ domain }}public/images/ico-mts.png" alt=""></div></a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="label">@{{ lang[ln].withdraw.t2 }}</div>
+							<div class="grid clear">
+								<div class="col"><input type="text" class="input" id="withdraw_wallet" v-bind:placeholder="payment.methods[payment.withdraw.method].comission.pattern"></div>
+								<div class="col">
+									<input type="text" class="input" id="w_value" v-on:input="withdraw_calc" v-bind:placeholder="lang[ln].withdraw.placeholder">
+									<div class="info">
+										<div class="subitem clear"><div class="left">@{{ lang[ln].withdraw.comission }}</div><div class="right" id="com">@{{ (payment.methods[payment.withdraw.method].comission.withdraw*100).toFixed(2) }}%</div></div>
+										<div class="subitem clear"><div class="left"><b>@{{ lang[ln].withdraw.finaly }}</b></div><div class="right"><b id="valwithcom">@{{ money(parseFloat(payment.withdraw.amount.toFixed(2)), 2) }} @{{ (ln == 'ru') ? 'руб.' : 'USD' }}</b></div></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="accept"><label v-on:click="withdraw_check">
+							<input type="checkbox" id="checkbox" v-if="payment.withdraw.checked" checked>
+							<input type="checkbox" id="checkbox" v-else>
+							<span></span>@{{ lang[ln].withdraw.str }}</label></div>
+						<div class="center">
+								<button type="submit" class="btn green" id="withBut" v-if="payment.withdraw.checked && !payment.withdraw.disableButton" v-on:click="withdraw_send">@{{ lang[ln].withdraw.btn }}</button>
+								<button type="submit" class="btn green" id="withBut" v-if="payment.withdraw.checked && payment.withdraw.disableButton">@{{ lang[ln].withdraw.btn2 }}</button>
+							<button type="submit" class="btn green" id="withBut" disabled v-if="!payment.withdraw.checked">@{{ lang[ln].withdraw.btn }}</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+		
+		<div class="popup" id="exchange" v-if="login.isAuth">
+			<a class="close" rel="close" v-on:click="closeModal"></a>
+			<div class="heading">@{{ lang[ln].send.title }}</div>
+			<div class="exchange">
+				<div class="image"><img src="{{ domain }}public/images/ico-exchange.svg" alt="" width="195"></div>
+				<div class="container">
+					<div class="form">
+						<div class="item">
+							<div class="label">@{{ lang[ln].send.myid }}</div>
+							<div class="grid clear">
+								<div class="col"><input type="text" class="input" v-bind:value="login.user.id" readonly></div>
+							</div>
+						</div>
+						<div class="item" v-html="lang[ln].send.t1"></div>
+						<div class="item" v-html="lang[ln].send.t2"></div>
+						<div class="item">
+							<div class="grid clear">
+								<div class="col"><input type="text" class="input targetID" v-bind:placeholder="lang[ln].send.label1"></div>
+								<div class="col"><input type="text" class="input sumToSend" v-on:change="sendInput" v-on:input="sendInput" v-bind:placeholder="lang[ln].send.label2"></div>
+							</div>
+						</div>
+						<div class="info"><div class="subheading">@{{ lang[ln].send.total }} <span id="minusSum">0.00</span><div class="ico-balance"></div></div><div class="comission">(@{{ lang[ln].send.comission }} @{{ send_comission }}%)</div></div>
+						<div class="center"><button type="submit" class="btn green" v-on:click="sendMoney" v-if="!send.disableButton">@{{ lang[ln].send.btn }}</button><button type="submit" class="btn green" v-else style="opacity:0.5;">@{{ lang[ln].send.btn2 }}</button></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="popup" id="terms_login" style="max-width: 680px;">
+			<a class="close" rel="close" v-on:click="closeModal"></a>
+			<div class="heading">@{{ lang[ln].terms.title }}</div>
+			<div class="exchange">
+				<div class="container" style="width: 100%;">
+<div class="terms-item">
+					<div class="heading">@{{ lang[ln].terms.t1 }}</div>
+					<ol class="decimal-list" v-html="lang[ln].terms.b1"></ol>
+				</div>
+				<div class="terms-item">
+					<div class="heading">@{{ lang[ln].terms.t2 }}</div>
+					<ol class="decimal-list" v-html="lang[ln].terms.b2"></ol>
+				</div>
+				<div class="terms-item">
+					<div class="heading">@{{ lang[ln].terms.t3 }}</div>
+					<ol class="decimal-list" v-html="lang[ln].terms.b3"></ol>
+				</div>
+				<div class="terms-item">
+					<div class="heading">@{{ lang[ln].terms.t4 }}</div>
+					<ol class="decimal-list" v-html="lang[ln].terms.b4"></ol>
+				</div>
+				<div class="terms-item">
+					<div class="heading">@{{ lang[ln].terms.t5 }}</div>
+					<ol class="decimal-list" v-html="lang[ln].terms.b5"></ol>
+				</div>
+				<div class="terms-item">
+					<div class="heading">@{{ lang[ln].terms.t6 }}</div>
+					<ol class="decimal-list" v-html="lang[ln].terms.b6"></ol>
+				</div>
+				<div class="terms-item">
+					<div class="heading">@{{ lang[ln].terms.t7 }}</div>
+					<ol class="decimal-list" v-html="lang[ln].terms.b7"></ol>
+				</div>
+				<div class="terms-item">
+					<div class="heading">@{{ lang[ln].terms.t8 }}</div>
+					<ol class="decimal-list" v-html="lang[ln].terms.b8"></ol>
+				</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="popup" id="shop" v-if="login.isAuth">
+			<a class="close" rel="close" v-on:click="closeModal"></a>
+			<div class="heading">@{{ lang[ln].skins.send_info }}</div>
+			<div class="user-datas">
+				<div class="container">
+					<div class="desc">@{{ lang[ln].skins.send_info2 }}</div>
+					<div class="form" v-if="skins.appid == 'real'">
+						<div class="item">
+							<div class="label">@{{ lang[ln].skins.fio }}</div>
+							<div class="grid clear">
+								<div class="col"><input type="text" class="input" v-bind:placeholder="lang[ln].skins.fio2" id="real_fio"></div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="label">@{{ lang[ln].skins.adres }}</div>
+							<div class="grid clear">
+								<div class="col"><input type="text" class="input" v-bind:placeholder="lang[ln].skins.adres" id="real_adress"></div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="label">@{{ lang[ln].skins.index }}</div>
+							<div class="grid clear">
+								<div class="col"><input type="text" class="input" v-bind:placeholder="lang[ln].skins.index2" id="real_post"></div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="label">@{{ lang[ln].skins.phone }}</div>
+							<div class="grid clear">
+								<div class="col"><input type="text" class="input" v-bind:placeholder="lang[ln].skins.phone2" id="real_phone"/></div>
+							</div>
+						</div>
+						<div class="item">
+							<div class="checkbox">
+								<input class="magic-checkbox" type="checkbox" name="layout" id="1" v-on:click="RealSkinsCheckBox" value="option"/>
+								<label for="1"></label>
+								<label class="text" for="1">
+									@{{ (ln == 'ru') ? 'Стоимость доставки 300 руб.' : ('Shipping cost $'+(300/currency.en).toFixed(2)+' USD.') }}
+								</label>
+							</div>
+						</div>
+						<div class="center">
+							<button type="submit" class="btn green" v-if="!skinsModalDisable && skins.appid == 'real' && !skins.real_button" style="opacity:0.5;">@{{ lang[ln].skins.accept }}</button>
+							<button type="submit" class="btn green" v-if="!skinsModalDisable && (skins.appid == 'real' && skins.real_button)" v-on:click="buyModalResolve">@{{ lang[ln].skins.accept }}</button>
+							<button type="submit" class="btn green" v-if="skinsModalDisable" style="opacity:0.5;">@{{ lang[ln].skins.wait }}</button>
+						</div>
+					</div>
+					<div class="form" v-if="skins.appid == 'vgo'">
+						<div class="item">
+							<div class="label">SteamID64</div>
+							<div class="grid clear">
+								<div class="col"><input type="text" class="input" placeholder="78901234567890123" id="vgo_steamid64"></div>
+							</div>
+						</div>
+						<div class="center">
+							<button type="submit" class="btn green" v-if="!skinsModalDisable" v-on:click="buyModalResolve">@{{ lang[ln].skins.accept }}</button>
+							<button type="submit" class="btn green" v-if="skinsModalDisable" style="opacity:0.5;">@{{ lang[ln].skins.wait }}</button>
+						</div>
+					</div>
+					<div class="form" v-if="skins.appid == '730' || skins.appid == '540'">
+						<div class="item">
+							<div class="label">@{{ lang[ln].skins.trade1 }}</div>
+							<div class="grid clear">
+								<div class="col"><input type="text" class="input" placeholder="https://steamcommunity.com/tradeoffer/new?partner=XXXXX&token=XXXXX" id="steam_tradeurl"></div>
+							</div>
+						</div>
+						<div class="center">
+							<button type="submit" class="btn green" v-if="!skinsModalDisable" v-on:click="buyModalResolve">@{{ lang[ln].skins.accept }}</button>
+							<button type="submit" class="btn green" v-if="skinsModalDisable" style="opacity:0.5;">@{{ lang[ln].skins.wait }}</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="lang-overlay" v-if="langModal">
+			<div class="lang-sel">
+				<a v-on:click="switchLang('ru')"><img src="{{ domain }}public/images/ru.png" style="width: 16px; height: 11px; margin-top: 4px;"/><span>Русский</span></a>
+				<a v-on:click="switchLang('en')"><img src="{{ domain }}public/images/en.png" style="width: 16px; height: 11px; margin-top: 4px;"/><span>English</span></a>
+			</div>
+		</div>
+	</div>
+</body>
+	<script type="text/javascript">
+VK.Widgets.AllowMessagesFromCommunity("vk_allow_messages_from_community", {height: 22}, 183289269);
+</script>
+</html>
+

@@ -1,0 +1,55 @@
+
+@font-face {
+	font-family: 'Montserrat';
+	font-weight: 400;
+	src: url('../fonts/Montserrat-Regular.eot');
+	src: url('../fonts/Montserrat-Regular.eot?#iefix') format('embedded-opentype'),
+    	 url('../fonts/Montserrat-Regular.woff2') format('woff2'),
+      	 url('../fonts/Montserrat-Regular.woff') format('woff'),
+      	 url('../fonts/Montserrat-Regular.ttf')  format('truetype'),
+       	 url('../fonts/Montserrat-Regular.svg') format('svg');
+}
+
+@font-face {
+	font-family: 'Montserrat';
+	font-weight: 500;
+	src: url('../fonts/Montserrat-Medium.eot');
+	src: url('../fonts/Montserrat-Medium.eot?#iefix') format('embedded-opentype'),
+    	 url('../fonts/Montserrat-Medium.woff2') format('woff2'),
+      	 url('../fonts/Montserrat-Medium.woff') format('woff'),
+      	 url('../fonts/Montserrat-Medium.ttf')  format('truetype'),
+       	 url('../fonts/Montserrat-Medium.svg') format('svg');
+}
+
+@font-face {
+	font-family: 'Montserrat';
+	font-weight: 600;
+	src: url('../fonts/Montserrat-SemiBold.eot');
+	src: url('../fonts/Montserrat-SemiBold.eot?#iefix') format('embedded-opentype'),
+    	 url('../fonts/Montserrat-SemiBold.woff2') format('woff2'),
+      	 url('../fonts/Montserrat-SemiBold.woff') format('woff'),
+      	 url('../fonts/Montserrat-SemiBold.ttf')  format('truetype'),
+       	 url('../fonts/Montserrat-SemiBold.svg') format('svg');
+}
+
+@font-face {
+	font-family: 'Montserrat';
+	font-weight: Bold;
+	src: url('../fonts/Montserrat-Bold.eot');
+	src: url('../fonts/Montserrat-Bold.eot?#iefix') format('embedded-opentype'),
+    	 url('../fonts/Montserrat-Bold.woff2') format('woff2'),
+      	 url('../fonts/Montserrat-Bold.woff') format('woff'),
+      	 url('../fonts/Montserrat-Bold.ttf')  format('truetype'),
+       	 url('../fonts/Montserrat-Bold.svg') format('svg');
+}
+
+@font-face {
+	font-family: 'Montserrat';
+	font-weight: 800;
+	src: url('../fonts/Montserrat-Black.eot');
+	src: url('../fonts/Montserrat-Black.eot?#iefix') format('embedded-opentype'),
+    	 url('../fonts/Montserrat-Black.woff2') format('woff2'),
+      	 url('../fonts/Montserrat-Black.woff') format('woff'),
+      	 url('../fonts/Montserrat-Black.ttf')  format('truetype'),
+       	 url('../fonts/Montserrat-Black.svg') format('svg');
+}
